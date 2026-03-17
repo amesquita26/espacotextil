@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grupo de Administração — Definição de Papéis</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --azul: #003087;
+    --azul-hover: #002070;
+    --dourado: #F2B705;
+    --dourado-hover: #d9a404;
+    --azul-claro: #E8F0FB;
+    --fundo: #F5F5F5;
+    --branco: #ffffff;
+    --texto: #0a0a0a;
+    --texto-sec: #4a4a5a;
+    --texto-ter: #8a8a9a;
+    --borda: rgba(0,48,135,0.12);
+    --borda-med: rgba(0,48,135,0.2);
+    --radius: 14px;
+    --radius-sm: 8px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--fundo);
+    color: var(--texto);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--borda);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .nav-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--dourado);
+  }
+  .nav-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--azul);
+    letter-spacing: .02em;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--texto-sec);
+    text-decoration: none;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--azul); }
+
+  /* SECTIONS */
+  section { padding: 80px 2rem; max-width: 960px; margin: 0 auto; }
+
+  /* HERO */
+  .hero {
+    min-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 100px 2rem 80px;
+    max-width: 960px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--dourado);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 2px;
+    background: var(--dourado);
+    border-radius: 2px;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 6vw, 72px);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--azul);
+    margin-bottom: 2rem;
+    max-width: 700px;
+  }
+  .hero-title em { font-style: italic; color: var(--texto-sec); }
+  .hero-body {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--texto-sec);
+    max-width: 540px;
+    margin-bottom: 1rem;
+  }
+  .hero-note {
+    font-size: 13px;
+    font-style: italic;
+    color: var(--texto-ter);
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--borda);
+    max-width: 480px;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--azul);
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 40px;
+    margin-top: 2.5rem;
+    text-decoration: none;
+    transition: background .2s, transform .15s;
+  }
+  .hero-badge:hover { background: var(--azul-hover); transform: translateY(-1px); }
+  .hero-badge span { font-size: 14px; }
+
+  /* DIVIDER */
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--borda);
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  /* SECTION HEADER */
+  .section-header { margin-bottom: 3rem; }
+  .section-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--dourado);
+    margin-bottom: .75rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-eyebrow::before {
+    content: '';
+    display: block;
+    width: 24px; height: 2px;
+    background: var(--dourado);
+    border-radius: 2px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 400;
+    color: var(--azul);
+    line-height: 1.2;
+    margin-bottom: .75rem;
+  }
+  .section-title em { font-style: italic; color: var(--texto-sec); }
+  .section-sub {
+    font-size: 14px;
+    color: var(--texto-sec);
+    line-height: 1.8;
+    max-width: 560px;
+  }
+
+  /* ROLES GRID */
+  .roles-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--borda);
+    border: 1px solid var(--borda);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .role-cell {
+    background: var(--branco);
+    padding: 2rem;
+    transition: background .2s;
+  }
+  .role-cell:hover { background: #fafbff; }
+  .role-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 400;
+    line-height: 1;
+    color: var(--azul);
+    opacity: .08;
+    margin-bottom: .75rem;
+  }
+  .role-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 40px;
+    margin-bottom: .75rem;
+  }
+  .role-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--azul);
+    margin-bottom: .4rem;
+    line-height: 1.2;
+  }
+  .role-essence {
+    font-size: 12px;
+    font-style: italic;
+    color: var(--texto-ter);
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+  .role-desc {
+    font-size: 13px;
+    line-height: 1.75;
+    color: var(--texto-sec);
+    margin-bottom: 1.25rem;
+  }
+  .block-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--texto-ter);
+    margin-bottom: .5rem;
+  }
+  .resp-list { list-style: none; margin-bottom: 1rem; }
+  .resp-list li {
+    font-size: 12px;
+    color: var(--texto-sec);
+    line-height: 1.6;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--borda);
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .resp-list li:last-child { border-bottom: none; }
+  .resp-dot {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 7px;
+  }
+  .traits { display: flex; flex-wrap: wrap; gap: 4px; }
+  .trait {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 40px;
+    background: var(--azul-claro);
+    color: var(--azul);
+    border: 1px solid rgba(0,48,135,.1);
+  }
+
+  /* VISION BLOCK */
+  .vision-block {
+    border: 1px solid var(--borda);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-top: 3rem;
+  }
+  .vision-header {
+    background: var(--azul);
+    padding: 2rem;
+    color: white;
+  }
+  .vision-header .eyebrow-white {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.5);
+    margin-bottom: .75rem;
+  }
+  .vision-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: white;
+  }
+  .vision-header h3 em { font-style: italic; color: var(--dourado); }
+  .vision-body { background: var(--branco); padding: 1.5rem 2rem; }
+  .rule-row {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--borda);
+  }
+  .rule-row:last-child { border-bottom: none; }
+  .rule-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--dourado);
+    flex-shrink: 0;
+    width: 28px;
+    line-height: 1.3;
+  }
+  .rule-text {
+    font-size: 13px;
+    line-height: 1.75;
+    color: var(--texto-sec);
+  }
+  .rule-text strong { font-weight: 500; color: var(--texto); }
+
+  /* PROFILES */
+  .profiles-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .profile-card {
+    background: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    transition: box-shadow .2s;
+  }
+  .profile-card:hover { box-shadow: 0 4px 24px rgba(0,48,135,.07); }
+  .profile-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 1.25rem;
+  }
+  .profile-avatar {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: var(--azul-claro);
+    color: var(--azul);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 500;
+    flex-shrink: 0;
+    border: 2px solid rgba(0,48,135,.12);
+  }
+  .profile-name {
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--texto);
+    margin-bottom: 4px;
+  }
+  .profile-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 40px;
+  }
+  .profile-divider {
+    border: none;
+    border-top: 1px solid var(--borda);
+    margin: 1rem 0;
+  }
+  .profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .prof-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--texto-ter);
+    margin-bottom: .5rem;
+  }
+  .prof-disp-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--azul);
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .prof-disp-label {
+    font-size: 11px;
+    font-style: italic;
+    color: var(--texto-ter);
+  }
+  .bar-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 5px;
+  }
+  .bar-label { font-size: 11px; color: var(--texto-sec); width: 120px; flex-shrink: 0; }
+  .bar-track {
+    flex: 1; height: 5px;
+    background: var(--azul-claro);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .bar-fill { height: 100%; border-radius: 3px; background: var(--azul); }
+  .bar-val { font-size: 11px; color: var(--texto-ter); width: 32px; text-align: right; flex-shrink: 0; }
+  .prof-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+  .prof-tag {
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 40px;
+    background: var(--fundo);
+    color: var(--texto-sec);
+    border: 1px solid var(--borda);
+  }
+  .alert-box {
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    margin-top: 1rem;
+    font-size: 12px;
+    color: var(--texto-sec);
+    line-height: 1.6;
+    background: #fffbea;
+    border-left: 3px solid var(--dourado);
+  }
+
+  /* VOTING */
+  .voting-wrap { background: var(--branco); border-radius: var(--radius); border: 1px solid var(--borda); overflow: hidden; }
+  .voting-header { background: var(--azul); padding: 2rem; }
+  .voting-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: white;
+    margin-bottom: .5rem;
+  }
+  .voting-header p { font-size: 13px; color: rgba(255,255,255,.65); line-height: 1.7; }
+  .voting-body { padding: 1.75rem; }
+  .vstep { display: none; }
+  .vstep.active { display: block; }
+
+  .v-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--texto-ter);
+    margin: 1rem 0 .5rem;
+  }
+  .v-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--borda);
+    margin-bottom: 6px;
+    cursor: pointer;
+    transition: all .15s;
+    background: white;
+  }
+  .v-row:hover { background: var(--azul-claro); border-color: rgba(0,48,135,.2); }
+  .v-row.selected { border-color: var(--azul); background: var(--azul-claro); }
+  .v-row.disabled { opacity: .35; cursor: not-allowed; pointer-events: none; }
+  .v-avatar {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--azul-claro);
+    color: var(--azul);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 500;
+    flex-shrink: 0;
+    border: 1px solid rgba(0,48,135,.15);
+  }
+  .v-radio {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    border: 1.5px solid #ccc;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color .15s;
+  }
+  .v-radio.checked { border-color: var(--azul); }
+  .v-radio-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--azul); }
+  .v-role-card { background: var(--fundo); border-radius: var(--radius-sm); padding: 1.25rem; margin-bottom: 12px; }
+  .v-role-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 40px;
+    margin-bottom: 10px;
+  }
+  .v-chip {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin: 2px;
+    background: white;
+    color: var(--texto-sec);
+    border: 1px solid var(--borda);
+  }
+  .v-winner {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    background: #edfaf3;
+    color: #1a7f4b;
+    border: 1px solid #b8ecd3;
+    margin-left: 6px;
+  }
+
+  /* BTN */
+  .btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 40px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: all .15s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-primary { background: var(--azul); color: white; }
+  .btn-primary:hover { background: var(--azul-hover); transform: translateY(-1px); }
+  .btn-gold { background: var(--dourado); color: var(--azul); }
+  .btn-gold:hover { background: var(--dourado-hover); transform: translateY(-1px); }
+  .btn-outline { background: transparent; color: var(--azul); border: 1.5px solid var(--azul); }
+  .btn-outline:hover { background: var(--azul-claro); }
+  .btn-full { width: 100%; }
+  .btn-row { display: flex; gap: 10px; margin-top: 1rem; }
+
+  /* FOOTER */
+  footer {
+    background: var(--azul);
+    color: white;
+    text-align: center;
+    padding: 3rem 2rem;
+    margin-top: 80px;
+  }
+  footer p { font-size: 13px; color: rgba(255,255,255,.5); line-height: 1.8; }
+  footer em { font-style: italic; color: rgba(255,255,255,.8); }
+
+  /* FADE IN */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp .6s ease both; }
+  .fade-up-2 { animation: fadeUp .6s .15s ease both; }
+  .fade-up-3 { animation: fadeUp .6s .3s ease both; }
+
+  @media (max-width: 640px) {
+    .roles-grid { grid-template-columns: 1fr; }
+    .profile-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-dot"></div>
+    <span class="nav-title">Grupo ADM · PUC Minas</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#ocupacoes">Ocupações</a></li>
+    <li><a href="#perfis">Perfis</a></li>
+    <li><a href="#votacao">Votação</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-eyebrow fade-up">Administração · Projeto Semestral</p>
+  <h1 class="hero-title fade-up-2">Quatro formas<br>de contribuir.<br><em>Um único objetivo.</em></h1>
+  <p class="hero-body fade-up-3">Para performarmos com mais qualidade, organizamos nossas contribuições de forma estratégica. Cada ocupação tem um foco diferente — não uma importância diferente.</p>
+  <p class="hero-note fade-up-3">Esta definição é estratégica, não obrigatória, e pode ser revisada ao longo do semestre conforme o grupo evoluir.</p>
+  <a href="#ocupacoes" class="hero-badge fade-up-3"><span>↓</span> Conhecer as ocupações</a>
+</div>
+
+<hr class="section-divider">
+
+<!-- OCUPAÇÕES -->
+<section id="ocupacoes">
+  <div class="section-header">
+    <p class="section-eyebrow">As ocupações</p>
+    <h2 class="section-title">O que faz cada um<br><em>dentro do grupo.</em></h2>
+    <p class="section-sub">Cada ocupação representa um ângulo de contribuição — não uma hierarquia. Todos somos igualmente responsáveis pelo resultado final.</p>
+  </div>
+
+  <div class="roles-grid">
+    <div class="role-cell">
+      <div class="role-num">01</div>
+      <span class="role-tag" style="background:#E8F0FB;color:#003087;border:1px solid rgba(0,48,135,.15)">Product Owner</span>
+      <h3 class="role-name">Gestor do projeto</h3>
+      <p class="role-essence">"Organiza o que precisa ser feito, em que ordem e com qual padrão."</p>
+      <p class="role-desc">O PO é o ponto de referência da operação do projeto — não do produto da empresa, mas da construção do trabalho em si. Traduz as expectativas do professor em entregas concretas, define prioridades quando há mais demanda do que tempo e garante que o grupo saiba o que está sendo feito e por quê.</p>
+      <p class="block-label">Principais responsabilidades</p>
+      <ul class="resp-list">
+        <li><div class="resp-dot" style="background:#003087"></div>Organizar e atualizar o backlog de tarefas do grupo</li>
+        <li><div class="resp-dot" style="background:#003087"></div>Definir prioridades com base nos prazos e critérios do projeto</li>
+        <li><div class="resp-dot" style="background:#003087"></div>Alinhar expectativas com o professor quando necessário</li>
+        <li><div class="resp-dot" style="background:#003087"></div>Validar se as entregas atendem ao escopo combinado</li>
+      </ul>
+      <p class="block-label" style="margin-top:1rem">Características centrais</p>
+      <div class="traits">
+        <span class="trait">Visão do todo</span><span class="trait">Tomada de decisão</span><span class="trait">Controle de escopo</span><span class="trait">Organização</span><span class="trait">Foco em entrega</span>
+      </div>
+    </div>
+
+    <div class="role-cell">
+      <div class="role-num">02</div>
+      <span class="role-tag" style="background:#e6f7f1;color:#0a5c3a;border:1px solid rgba(10,92,58,.15)">Scrum Master</span>
+      <h3 class="role-name">Facilitador do processo</h3>
+      <p class="role-essence">"Garante que o grupo se mova — sem travar."</p>
+      <p class="role-desc">O Scrum Master cuida do ritmo e do fluxo do trabalho. Conduz as reuniões, acompanha os prazos de perto, identifica o que está travando o grupo e age para destravar. Não decide o conteúdo do projeto — facilita para que todos consigam trabalhar com mais clareza e menos atrito.</p>
+      <p class="block-label">Principais responsabilidades</p>
+      <ul class="resp-list">
+        <li><div class="resp-dot" style="background:#0a5c3a"></div>Conduzir e organizar as reuniões do grupo</li>
+        <li><div class="resp-dot" style="background:#0a5c3a"></div>Monitorar prazos e sinalizar riscos com antecedência</li>
+        <li><div class="resp-dot" style="background:#0a5c3a"></div>Remover obstáculos que impeçam o andamento das tarefas</li>
+        <li><div class="resp-dot" style="background:#0a5c3a"></div>Cobrar entregas de forma direta e sem criar tensão</li>
+      </ul>
+      <p class="block-label" style="margin-top:1rem">Características centrais</p>
+      <div class="traits">
+        <span class="trait">Organização processual</span><span class="trait">Cobrança sem atrito</span><span class="trait">Comunicação clara</span><span class="trait">Antecipação de riscos</span><span class="trait">Neutralidade</span>
+      </div>
+    </div>
+
+    <div class="role-cell">
+      <div class="role-num">03</div>
+      <span class="role-tag" style="background:#fff4e0;color:#7a4800;border:1px solid rgba(122,72,0,.15)">Líder</span>
+      <h3 class="role-name">Porta-voz do grupo</h3>
+      <p class="role-essence">"Representa o grupo e mantém o ambiente coeso."</p>
+      <p class="role-desc">O Líder é a interface do grupo com o mundo externo — professor, apresentações, situações em que alguém precisa falar por todos. Internamente, cuida do clima e da motivação, percebendo quando o grupo precisa de atenção humana além da operacional.</p>
+      <p class="block-label">Principais responsabilidades</p>
+      <ul class="resp-list">
+        <li><div class="resp-dot" style="background:#F2B705"></div>Representar o grupo em comunicações externas</li>
+        <li><div class="resp-dot" style="background:#F2B705"></div>Tomar a palavra em apresentações e entregas formais</li>
+        <li><div class="resp-dot" style="background:#F2B705"></div>Monitorar o clima do grupo e agir quando necessário</li>
+        <li><div class="resp-dot" style="background:#F2B705"></div>Comunicar decisões coletivas com clareza</li>
+      </ul>
+      <p class="block-label" style="margin-top:1rem">Características centrais</p>
+      <div class="traits">
+        <span class="trait">Inteligência emocional</span><span class="trait">Confiança natural</span><span class="trait">Representatividade</span><span class="trait">Orientação a pessoas</span><span class="trait">Presença</span>
+      </div>
+    </div>
+
+    <div class="role-cell">
+      <div class="role-num">04</div>
+      <span class="role-tag" style="background:#fdeaea;color:#7a1a1a;border:1px solid rgba(122,26,26,.15)">Gestor de Conflitos</span>
+      <h3 class="role-name">Mediador do grupo</h3>
+      <p class="role-essence">"Transforma tensão em conversa, e conversa em acordo."</p>
+      <p class="role-desc">O Gestor de Conflitos atua nos momentos em que surgem atritos — de ritmo, de opinião, de comprometimento. É quem nomeia o problema com cuidado, ouve todos os lados sem julgamento e conduz o grupo para um entendimento.</p>
+      <p class="block-label">Principais responsabilidades</p>
+      <ul class="resp-list">
+        <li><div class="resp-dot" style="background:#c0392b"></div>Identificar e abordar tensões antes que se agravem</li>
+        <li><div class="resp-dot" style="background:#c0392b"></div>Mediar conversas difíceis de forma neutra e respeitosa</li>
+        <li><div class="resp-dot" style="background:#c0392b"></div>Propor acordos de convivência quando necessário</li>
+        <li><div class="resp-dot" style="background:#c0392b"></div>Monitorar o bem-estar relacional do grupo</li>
+      </ul>
+      <p class="block-label" style="margin-top:1rem">Características centrais</p>
+      <div class="traits">
+        <span class="trait">Escuta ativa</span><span class="trait">Imparcialidade</span><span class="trait">Tolerância à tensão</span><span class="trait">Empatia</span><span class="trait">Foco em solução</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- VISION -->
+  <div class="vision-block">
+    <div class="vision-header">
+      <p class="eyebrow-white">Visão de longo prazo</p>
+      <h3>Trabalhamos com o melhor cenário:<br><em>este grupo junto até o final do curso.</em></h3>
+    </div>
+    <div class="vision-body">
+      <div class="rule-row">
+        <span class="rule-num">I</span>
+        <p class="rule-text"><strong>Nenhuma ocupação se repete por dois semestres seguidos.</strong> O objetivo é que, ao longo do curso, cada um dos oito membros passe por cada uma das quatro ocupações — desenvolvendo competências diferentes a cada ciclo.</p>
+      </div>
+      <div class="rule-row">
+        <span class="rule-num">II</span>
+        <p class="rule-text"><strong>A rotação é parte da estratégia.</strong> Assumir uma ocupação diferente a cada semestre é uma oportunidade de crescimento deliberado — não uma obrigação burocrática. Com o tempo, o grupo inteiro terá vivenciado todos os ângulos do projeto.</p>
+      </div>
+      <div class="rule-row">
+        <span class="rule-num">III</span>
+        <p class="rule-text"><strong>Exceções existem, mas exigem consenso.</strong> Em casos extraordinários — de saúde, disponibilidade ou contexto específico do semestre — a repetição de uma ocupação pode ser considerada, desde que haja concordância total do grupo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- PERFIS -->
+<section id="perfis">
+  <div class="section-header">
+    <p class="section-eyebrow">Perfis individuais</p>
+    <h2 class="section-title">Quem somos<br><em>e o que trazemos.</em></h2>
+    <p class="section-sub">Cada perfil foi elaborado a partir das respostas individuais ao formulário. As respostas originais são confidenciais — apenas os indicadores e características são exibidos.</p>
+  </div>
+
+  <div class="profiles-grid">
+
+    <!-- Weberty -->
+    <div class="profile-card">
+      <div class="profile-header">
+        <div class="profile-avatar">WR</div>
+        <div>
+          <p class="profile-name">Weberty Roberto</p>
+          <span class="profile-badge" style="background:#E8F0FB;color:#003087;border:1px solid rgba(0,48,135,.15)">Sugestão: Gestor de Conflitos</span>
+        </div>
+      </div>
+      <hr class="profile-divider">
+      <div class="profile-grid">
+        <div>
+          <p class="prof-label">Disponibilidade</p>
+          <p class="prof-disp-num">4</p>
+          <p class="prof-disp-label">informado pelo membro</p>
+        </div>
+        <div>
+          <p class="prof-label">Aderência por papel</p>
+          <div class="bar-row"><span class="bar-label">Gestor Conflitos</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:#c0392b"></div></div><span class="bar-val">100%</span></div>
+          <div class="bar-row"><span class="bar-label">Líder</span><div class="bar-track"><div class="bar-fill" style="width:93%"></div></div><span class="bar-val">93%</span></div>
+          <div class="bar-row"><span class="bar-label">PO</span><div class="bar-track"><div class="bar-fill" style="width:90%"></div></div><span class="bar-val">90%</span></div>
+          <div class="bar-row"><span class="bar-label">Scrum Master</span><div class="bar-track"><div class="bar-fill" style="width:75%"></div></div><span class="bar-val">75%</span></div>
+        </div>
+        <div>
+          <p class="prof-label">Características</p>
+          <div class="prof-tags">
+            <span class="prof-tag">Alta empatia</span><span class="prof-tag">Escuta ativa</span><span class="prof-tag">Assertividade no escopo</span><span class="prof-tag">Visão sistêmica</span>
+          </div>
+        </div>
+      </div>
+      <div class="alert-box">Maior disponibilidade concentrada no período noturno — reuniões e entregas diurnas podem exigir alinhamento prévio.</div>
+    </div>
+
+    <!-- Caio -->
+    <div class="profile-card">
+      <div class="profile-header">
+        <div class="profile-avatar">CR</div>
+        <div>
+          <p class="profile-name">Caio Rodrigo</p>
+          <span class="profile-badge" style="background:#E8F0FB;color:#003087;border:1px solid rgba(0,48,135,.15)">Sugestão: Gestor de Conflitos</span>
+        </div>
+      </div>
+      <hr class="profile-divider">
+      <div class="profile-grid">
+        <div>
+          <p class="prof-label">Disponibilidade</p>
+          <p class="prof-disp-num">3</p>
+          <p class="prof-disp-label">informado pelo membro</p>
+        </div>
+        <div>
+          <p class="prof-label">Aderência por papel</p>
+          <div class="bar-row"><span class="bar-label">Gestor Conflitos</span><div class="bar-track"><div class="bar-fill" style="width:93%;background:#c0392b"></div></div><span class="bar-val">93%</span></div>
+          <div class="bar-row"><span class="bar-label">Líder</span><div class="bar-track"><div class="bar-fill" style="width:54%"></div></div><span class="bar-val">54%</span></div>
+          <div class="bar-row"><span class="bar-label">PO</span><div class="bar-track"><div class="bar-fill" style="width:36%"></div></div><span class="bar-val">36%</span></div>
+          <div class="bar-row"><span class="bar-label">Scrum Master</span><div class="bar-track"><div class="bar-fill" style="width:27%"></div></div><span class="bar-val">27%</span></div>
+        </div>
+        <div>
+          <p class="prof-label">Características</p>
+          <div class="prof-tags">
+            <span class="prof-tag">Boa escuta</span><span class="prof-tag">Perfil receptivo</span><span class="prof-tag">Em desenvolvimento</span><span class="prof-tag">Primeiros passos acadêmicos</span>
+          </div>
+        </div>
+      </div>
+      <div class="alert-box">Disponibilidade pode ser comprometida por questões de saúde ao longo do semestre.</div>
+    </div>
+
+    <!-- Marcos -->
+    <div class="profile-card">
+      <div class="profile-header">
+        <div class="profile-avatar">MP</div>
+        <div>
+          <p class="profile-name">Marcos Paulo</p>
+          <span class="profile-badge" style="background:#f5f5f5;color:#4a4a5a;border:1px solid #ddd">Sugestão: Membro executor</span>
+        </div>
+      </div>
+      <hr class="profile-divider">
+      <div class="profile-grid">
+        <div>
+          <p class="prof-label">Disponibilidade</p>
+          <p class="prof-disp-num">3</p>
+          <p class="prof-disp-label">informado pelo membro</p>
+        </div>
+        <div>
+          <p class="prof-label">Aderência por papel</p>
+          <div class="bar-row"><span class="bar-label">Scrum Master</span><div class="bar-track"><div class="bar-fill" style="width:77%"></div></div><span class="bar-val">77%</span></div>
+          <div class="bar-row"><span class="bar-label">PO</span><div class="bar-track"><div class="bar-fill" style="width:76%"></div></div><span class="bar-val">76%</span></div>
+          <div class="bar-row"><span class="bar-label">Gestor Conflitos</span><div class="bar-track"><div class="bar-fill" style="width:60%;background:#c0392b"></div></div><span class="bar-val">60%</span></div>
+          <div class="bar-row"><span class="bar-label">Líder</span><div class="bar-track"><div class="bar-fill" style="width:42%"></div></div><span class="bar-val">42%</span></div>
+        </div>
+        <div>
+          <p class="prof-label">Características</p>
+          <div class="prof-tags">
+            <span class="prof-tag">Iniciativa</span><span class="prof-tag">Perfil técnico</span><span class="prof-tag">Visão ampla</span><span class="prof-tag">Rotina de alta demanda</span>
+          </div>
+        </div>
+      </div>
+      <div class="alert-box">Disponibilidade pode ser reduzida em períodos de safra agrícola.</div>
+    </div>
+
+    <!-- Dayra -->
+    <div class="profile-card">
+      <div class="profile-header">
+        <div class="profile-avatar">DV</div>
+        <div>
+          <p class="profile-name">Dayra Vitória</p>
+          <span class="profile-badge" style="background:#E8F0FB;color:#003087;border:1px solid rgba(0,48,135,.15)">Sugestão: Gestor de Conflitos</span>
+        </div>
+      </div>
+      <hr class="profile-divider">
+      <div class="profile-grid">
+        <div>
+          <p class="prof-label">Disponibilidade</p>
+          <p class="prof-disp-num">4</p>
+          <p class="prof-disp-label">informado pelo membro</p>
+        </div>
+        <div>
+          <p class="prof-label">Aderência por papel</p>
+          <div class="bar-row"><span class="bar-label">Gestor Conflitos</span><div class="bar-track"><div class="bar-fill" style="width:94%;background:#c0392b"></div></div><span class="bar-val">94%</span></div>
+          <div class="bar-row"><span class="bar-label">Scrum Master</span><div class="bar-track"><div class="bar-fill" style="width:84%"></div></div><span class="bar-val">84%</span></div>
+          <div class="bar-row"><span class="bar-label">Líder</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">80%</span></div>
+          <div class="bar-row"><span class="bar-label">PO</span><div class="bar-track"><div class="bar-fill" style="width:74%"></div></div><span class="bar-val">74%</span></div>
+        </div>
+        <div>
+          <p class="prof-label">Características</p>
+          <div class="prof-tags">
+            <span class="prof-tag">Experiência em mediação</span><span class="prof-tag">Organização</span><span class="prof-tag">Alta escuta</span><span class="prof-tag">Cobrança sem atrito</span>
+          </div>
+        </div>
+      </div>
+      <div class="alert-box">Disponibilidade concentrada a partir das 20h nos dias úteis.</div>
+    </div>
+
+    <!-- Ana Vitória -->
+    <div class="profile-card">
+      <div class="profile-header">
+        <div class="profile-avatar">AV</div>
+        <div>
+          <p class="profile-name">Ana Vitória</p>
+          <span class="profile-badge" style="background:#f5f5f5;color:#4a4a5a;border:1px solid #ddd">Sugestão: Membro executor</span>
+        </div>
+      </div>
+      <hr class="profile-divider">
+      <div class="profile-grid">
+        <div>
+          <p class="prof-label">Disponibilidade</p>
+          <p class="prof-disp-num">4</p>
+          <p class="prof-disp-label">informado pelo membro</p>
+        </div>
+        <div>
+          <p class="prof-label">Aderência por papel</p>
+          <div class="bar-row"><span class="bar-label">Gestor Conflitos</span><div class="bar-track"><div class="bar-fill" style="width:48%;background:#c0392b"></div></div><span class="bar-val">48%</span></div>
+          <div class="bar-row"><span class="bar-label">PO</span><div class="bar-track"><div class="bar-fill" style="width:43%"></div></div><span class="bar-val">43%</span></div>
+          <div class="bar-row"><span class="bar-label">Scrum Master</span><div class="bar-track"><div class="bar-fill" style="width:42%"></div></div><span class="bar-val">42%</span></div>
+          <div class="bar-row"><span class="bar-label">Líder</span><div class="bar-track"><div class="bar-fill" style="width:27%"></div></div><span class="bar-val">27%</span></div>
+        </div>
+        <div>
+          <p class="prof-label">Características</p>
+          <div class="prof-tags">
+            <span class="prof-tag">Alta organização</span><span class="prof-tag">Perfil administrativo</span><span class="prof-tag">Boa escuta</span><span class="prof-tag">Preferência por execução</span>
+          </div>
+        </div>
+      </div>
+      <div class="alert-box">Perfil mais alinhado à execução — baixa aderência a papéis de liderança, consistente com a própria autoavaliação.</div>
+    </div>
+
+    <!-- João Pedro -->
+    <div class="profile-card">
+      <div class="profile-header">
+        <div class="profile-avatar">JP</div>
+        <div>
+          <p class="profile-name">João Pedro</p>
+          <span class="profile-badge" style="background:#E8F0FB;color:#003087;border:1px solid rgba(0,48,135,.15)">Sugestão: Gestor de Conflitos</span>
+        </div>
+      </div>
+      <hr class="profile-divider">
+      <div class="profile-grid">
+        <div>
+          <p class="prof-label">Disponibilidade</p>
+          <p class="prof-disp-num">3</p>
+          <p class="prof-disp-label">informado pelo membro</p>
+        </div>
+        <div>
+          <p class="prof-label">Aderência por papel</p>
+          <div class="bar-row"><span class="bar-label">Gestor Conflitos</span><div class="bar-track"><div class="bar-fill" style="width:97%;background:#c0392b"></div></div><span class="bar-val">97%</span></div>
+          <div class="bar-row"><span class="bar-label">Líder</span><div class="bar-track"><div class="bar-fill" style="width:68%"></div></div><span class="bar-val">68%</span></div>
+          <div class="bar-row"><span class="bar-label">PO</span><div class="bar-track"><div class="bar-fill" style="width:58%"></div></div><span class="bar-val">58%</span></div>
+          <div class="bar-row"><span class="bar-label">Scrum Master</span><div class="bar-track"><div class="bar-fill" style="width:56%"></div></div><span class="bar-val">56%</span></div>
+        </div>
+        <div>
+          <p class="prof-label">Características</p>
+          <div class="prof-tags">
+            <span class="prof-tag">Mediação em grupo</span><span class="prof-tag">Alta escuta</span><span class="prof-tag">Assertividade respeitosa</span><span class="prof-tag">Orientação a pessoas</span>
+          </div>
+        </div>
+      </div>
+      <div class="alert-box">Disponibilidade limitada pela carga de trabalho e compromissos fixos durante a semana.</div>
+    </div>
+
+    <!-- Izabelle -->
+    <div class="profile-card">
+      <div class="profile-header">
+        <div class="profile-avatar">IS</div>
+        <div>
+          <p class="profile-name">Izabelle Sara</p>
+          <span class="profile-badge" style="background:#E8F0FB;color:#003087;border:1px solid rgba(0,48,135,.15)">Sugestão: Líder</span>
+        </div>
+      </div>
+      <hr class="profile-divider">
+      <div class="profile-grid">
+        <div>
+          <p class="prof-label">Disponibilidade</p>
+          <p class="prof-disp-num">4</p>
+          <p class="prof-disp-label">informado pelo membro</p>
+        </div>
+        <div>
+          <p class="prof-label">Aderência por papel</p>
+          <div class="bar-row"><span class="bar-label">PO</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">100%</span></div>
+          <div class="bar-row"><span class="bar-label">Scrum Master</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">100%</span></div>
+          <div class="bar-row"><span class="bar-label">Líder</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">100%</span></div>
+          <div class="bar-row"><span class="bar-label">Gestor Conflitos</span><div class="bar-track"><div class="bar-fill" style="width:88%;background:#c0392b"></div></div><span class="bar-val">88%</span></div>
+        </div>
+        <div>
+          <p class="prof-label">Características</p>
+          <div class="prof-tags">
+            <span class="prof-tag">Liderança profissional</span><span class="prof-tag">Visão estratégica</span><span class="prof-tag">Alta assertividade</span><span class="prof-tag">Orientada a resultados</span>
+          </div>
+        </div>
+      </div>
+      <div class="alert-box">Dificuldade declarada com prazos muito curtos e com membros ausentes ou sem comunicação.</div>
+    </div>
+
+    <!-- Augusto -->
+    <div class="profile-card">
+      <div class="profile-header">
+        <div class="profile-avatar">AM</div>
+        <div>
+          <p class="profile-name">Augusto Mesquita</p>
+          <span class="profile-badge" style="background:#E8F0FB;color:#003087;border:1px solid rgba(0,48,135,.15)">Sugestão: Product Owner</span>
+        </div>
+      </div>
+      <hr class="profile-divider">
+      <div class="profile-grid">
+        <div>
+          <p class="prof-label">Disponibilidade</p>
+          <p class="prof-disp-num">4</p>
+          <p class="prof-disp-label">informado pelo membro</p>
+        </div>
+        <div>
+          <p class="prof-label">Aderência por papel</p>
+          <div class="bar-row"><span class="bar-label">Scrum Master</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">100%</span></div>
+          <div class="bar-row"><span class="bar-label">Gestor Conflitos</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:#c0392b"></div></div><span class="bar-val">100%</span></div>
+          <div class="bar-row"><span class="bar-label">PO</span><div class="bar-track"><div class="bar-fill" style="width:98%"></div></div><span class="bar-val">98%</span></div>
+          <div class="bar-row"><span class="bar-label">Líder</span><div class="bar-track"><div class="bar-fill" style="width:96%"></div></div><span class="bar-val">96%</span></div>
+        </div>
+        <div>
+          <p class="prof-label">Características</p>
+          <div class="prof-tags">
+            <span class="prof-tag">Gestão de operações</span><span class="prof-tag">Análise de dados</span><span class="prof-tag">Visão estratégica</span><span class="prof-tag">Referência natural</span>
+          </div>
+        </div>
+      </div>
+      <div class="alert-box">Prefere direcionar sua energia para o papel de PO — escolha consciente sobre onde quer contribuir neste semestre.</div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- VOTAÇÃO -->
+<section id="votacao">
+  <div class="section-header">
+    <p class="section-eyebrow">Votação</p>
+    <h2 class="section-title">A decisão<br><em>é do grupo.</em></h2>
+    <p class="section-sub">Cada membro vota em um candidato por ocupação. Os resultados aparecem em tempo real. Você não pode votar em si mesmo.</p>
+  </div>
+
+  <div class="voting-wrap">
+    <div class="voting-header">
+      <h2>Painel de votação</h2>
+      <p>Identifique-se, vote em um candidato por ocupação e acompanhe o resultado ao vivo.</p>
+    </div>
+    <div class="voting-body">
+
+      <!-- IDENTIFY -->
+      <div class="vstep active" id="vstep-id">
+        <p class="v-label">Selecione seu nome</p>
+        <div id="v-name-list"></div>
+        <div class="btn-row">
+          <button class="btn btn-primary btn-full" onclick="vConfirm()">Continuar →</button>
+        </div>
+      </div>
+
+      <!-- VOTE -->
+      <div class="vstep" id="vstep-vote">
+        <p style="font-size:13px;color:var(--texto-sec);margin-bottom:1.25rem">Votando como <strong id="v-voter-label"></strong> — vote em um candidato por ocupação.</p>
+        <div id="v-panels"></div>
+        <div class="btn-row">
+          <button class="btn btn-outline" onclick="vShow('vstep-id')">← Voltar</button>
+          <button class="btn btn-gold" style="flex:1" onclick="vSubmit()">Registrar meu voto ↗</button>
+        </div>
+      </div>
+
+      <!-- RESULTS -->
+      <div class="vstep" id="vstep-results">
+        <p class="v-label" id="v-count-label"></p>
+        <div id="v-results"></div>
+        <div class="btn-row">
+          <button class="btn btn-outline" onclick="vShow('vstep-id')">Voltar ao início</button>
+          <button class="btn btn-primary" onclick="vLoadResults()">Atualizar ↺</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Grupo de Administração · PUC Minas<br>
+  <em>A definição dessas ocupações é uma escolha estratégica. Não é hierarquia — é organização.</em></p>
+</footer>
+
+<script>
+const MEMBERS = [
+  {name:'Weberty Roberto',  initials:'WR'},
+  {name:'Caio Rodrigo',     initials:'CR'},
+  {name:'Marcos Paulo',     initials:'MP'},
+  {name:'Dayra Vitória',    initials:'DV'},
+  {name:'Ana Vitória',      initials:'AV'},
+  {name:'João Pedro',       initials:'JP'},
+  {name:'Izabelle Sara',    initials:'IS'},
+  {name:'Augusto Mesquita', initials:'AM'},
+];
+
+const ROLES = [
+  {key:'PO',  label:'Product Owner',        color:'#003087', bg:'#E8F0FB', bar:'#003087'},
+  {key:'SM',  label:'Scrum Master',         color:'#0a5c3a', bg:'#e6f7f1', bar:'#0a5c3a'},
+  {key:'LID', label:'Líder',                color:'#7a4800', bg:'#fff4e0', bar:'#F2B705'},
+  {key:'GC',  label:'Gestor de Conflitos',  color:'#7a1a1a', bg:'#fdeaea', bar:'#c0392b'},
+];
+
+const STORAGE_KEY = 'votes_grupo_adm_puc_v1';
+let vVoter = null;
+let vMyVotes = {};
+
+async function vLoadVotes() {
+  try {
+    const r = await window.storage.get(STORAGE_KEY, true);
+    return r ? JSON.parse(r.value) : {};
+  } catch(e) { return {}; }
+}
+
+async function vSaveVotes(votes) {
+  await window.storage.set(STORAGE_KEY, JSON.stringify(votes), true);
+}
+
+function vShow(id) {
+  document.querySelectorAll('.vstep').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (id === 'vstep-id') vRenderNames();
+  if (id === 'vstep-results') vLoadResults();
+}
+
+async function vRenderNames() {
+  const votes = await vLoadVotes();
+  document.getElementById('v-name-list').innerHTML = MEMBERS.map(m => {
+    const voted = votes[m.name] !== undefined;
+    const sel = vVoter === m.name;
+    return `<div class="v-row${voted?' disabled':''}${sel?' selected':''}" onclick="vSelectVoter('${m.name}')">
+      <div class="v-avatar">${m.initials}</div>
+      <span style="font-size:13px;font-weight:500;flex:1;color:var(--texto)">${m.name}</span>
+      ${voted ? `<span style="font-size:11px;font-style:italic;color:var(--texto-ter)">já votou</span>` : ''}
+      <div class="v-radio${sel?' checked':''}">
+        ${sel ? '<div class="v-radio-dot"></div>' : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function vSelectVoter(name) {
+  vVoter = name;
+  vRenderNames();
+}
+
+async function vConfirm() {
+  if (!vVoter) { alert('Selecione seu nome para continuar.'); return; }
+  const votes = await vLoadVotes();
+  if (votes[vVoter]) { alert('Você já registrou seu voto nesta sessão.'); return; }
+  document.getElementById('v-voter-label').textContent = vVoter;
+  vMyVotes = {};
+  vRenderPanels();
+  vShow('vstep-vote');
+}
+
+function vRenderPanels() {
+  document.getElementById('v-panels').innerHTML = ROLES.map(role => `
+    <div class="v-role-card">
+      <span class="v-role-badge" style="background:${role.bg};color:${role.color};border:1px solid ${role.color}22">${role.label}</span>
+      ${MEMBERS.map(m => {
+        const isSelf = m.name === vVoter;
+        const sel = vMyVotes[role.key] === m.name;
+        return `<div class="v-row${sel?' selected':''}${isSelf?' disabled':''}" onclick="vSelect('${role.key}','${m.name}')">
+          <div class="v-avatar">${m.initials}</div>
+          <span style="font-size:13px;font-weight:500;flex:1;color:var(--texto)">${m.name}${isSelf?' <em style="font-size:11px;color:var(--texto-ter)">(você)</em>':''}</span>
+          <div class="v-radio${sel?' checked':''}">
+            ${sel ? '<div class="v-radio-dot"></div>' : ''}
+          </div>
+        </div>`;
+      }).join('')}
+    </div>`).join('');
+}
+
+function vSelect(key, name) {
+  vMyVotes[key] = name;
+  vRenderPanels();
+}
+
+async function vSubmit() {
+  const missing = ROLES.filter(r => !vMyVotes[r.key]);
+  if (missing.length) {
+    alert(`Vote em todos os papéis antes de confirmar.\nFaltam: ${missing.map(r => r.label).join(', ')}`);
+    return;
+  }
+  const votes = await vLoadVotes();
+  votes[vVoter] = vMyVotes;
+  await vSaveVotes(votes);
+  vShow('vstep-results');
+}
+
+async function vLoadResults() {
+  const votes = await vLoadVotes();
+  const count = Object.keys(votes).length;
+  document.getElementById('v-count-label').textContent = `${count} de ${MEMBERS.length} membros votaram`;
+
+  document.getElementById('v-results').innerHTML = ROLES.map(role => {
+    const tally = {};
+    MEMBERS.forEach(m => { tally[m.name] = []; });
+    Object.entries(votes).forEach(([voter, v]) => {
+      if (v[role.key]) tally[v[role.key]].push(voter);
+    });
+    const sorted = Object.entries(tally).sort((a, b) => b[1].length - a[1].length);
+    const max = sorted[0][1].length;
+
+    return `<div style="margin-bottom:1.25rem">
+      <span class="v-role-badge" style="background:${role.bg};color:${role.color};border:1px solid ${role.color}22;display:inline-block;margin-bottom:10px">${role.label}</span>
+      ${sorted.map(([name, voters]) => {
+        const m = MEMBERS.find(x => x.name === name);
+        const pct = count > 0 ? Math.round((voters.length / count) * 100) : 0;
+        const winner = voters.length > 0 && voters.length === max;
+        return `<div style="margin-bottom:8px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+            <div class="v-avatar" style="width:26px;height:26px;font-size:10px">${m.initials}</div>
+            <span style="font-size:13px;font-weight:${winner?'500':'400'};color:var(--texto);flex:1">${name}</span>
+            <span style="font-size:12px;color:var(--texto-ter)">${voters.length}v</span>
+            ${winner && voters.length > 0 ? `<span class="v-winner">mais votado</span>` : ''}
+          </div>
+          <div class="bar-track" style="margin-left:34px">
+            <div class="bar-fill" style="width:${pct}%;background:${role.bar}"></div>
+          </div>
+          ${voters.length > 0 ? `<div style="margin-left:34px;margin-top:4px">${voters.map(v => `<span class="v-chip">${v}</span>`).join('')}</div>` : ''}
+        </div>`;
+      }).join('')}
+      <hr style="border:none;border-top:1px solid var(--borda);margin-top:8px">
+    </div>`;
+  }).join('');
+}
+
+vRenderNames();
+</script>
+</body>
+</html>
