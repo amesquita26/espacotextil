@@ -596,10 +596,35 @@
   .fade-up-2 { animation: fadeUp .6s .15s ease both; }
   .fade-up-3 { animation: fadeUp .6s .3s ease both; }
 
+  .tab-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 16px;
+    border-radius: 40px;
+    border: 1.5px solid transparent;
+    background: transparent;
+    color: var(--texto-sec);
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .tab-btn:hover { background: var(--azul-claro); color: var(--azul); }
+  .tab-btn.active { background: var(--azul); color: white; border-color: var(--azul); }
+
+  .tab-page {
+    display: none;
+    position: fixed;
+    top: 56px;
+    left: 0; right: 0; bottom: 0;
+    overflow-y: auto;
+    background: var(--fundo);
+    -webkit-overflow-scrolling: touch;
+  }
+  .tab-page.active { display: block; }
+
   @media (max-width: 640px) {
     .roles-grid { grid-template-columns: 1fr; }
     .profile-grid { grid-template-columns: 1fr; }
-    .nav-links { display: none; }
   }
 </style>
 </head>
@@ -611,25 +636,95 @@
     <div class="nav-dot"></div>
     <span class="nav-title">Grupo ADM · PUC Minas</span>
   </div>
-  <ul class="nav-links">
-    <li><a href="#ocupacoes">Ocupações</a></li>
-    <li><a href="#perfis">Perfis</a></li>
-    <li><a href="#votacao">Votação</a></li>
-  </ul>
+  <div style="display:flex;align-items:center;gap:4px">
+    <button class="tab-btn active" onclick="switchTab('grupo')">O grupo</button>
+    <button class="tab-btn" onclick="switchTab('membros')">Membros</button>
+    <button class="tab-btn" onclick="switchTab('etapa')">Próxima etapa</button>
+  </div>
 </nav>
+
+<!-- ABA GRUPO -->
+<div id="tab-grupo" class="tab-page active">
 
 <!-- HERO -->
 <div class="hero">
   <p class="hero-eyebrow fade-up">Administração · Projeto Semestral</p>
   <h1 class="hero-title fade-up-2">Quatro formas<br>de contribuir.<br><em>Um único objetivo.</em></h1>
   <p class="hero-body fade-up-3">Para performarmos com mais qualidade, organizamos nossas contribuições de forma estratégica. Cada ocupação tem um foco diferente — não uma importância diferente.</p>
-  <p class="hero-note fade-up-3">Esta definição é estratégica, não obrigatória, e pode ser revisada ao longo do semestre conforme o grupo evoluir.</p>
-  <a href="#ocupacoes" class="hero-badge fade-up-3"><span>↓</span> Conhecer as ocupações</a>
 </div>
 
 <hr class="section-divider">
 
-<!-- OCUPAÇÕES -->
+<!-- METODOLOGIA -->
+<section id="metodologia">
+  <div class="section-header">
+    <p class="section-eyebrow">Como chegamos aqui</p>
+    <h2 class="section-title">A metodologia<br><em>por trás da organização.</em></h2>
+    <p class="section-sub">Antes de definir quem faz o quê, entendemos que seria mais justo e estratégico basear essa decisão em dados — não em preferência pessoal ou ordem de chegada.</p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--borda);border:1px solid var(--borda);border-radius:var(--radius);overflow:hidden;margin-bottom:2rem">
+
+    <div style="background:var(--branco);padding:1.75rem">
+      <p style="font-family:'Playfair Display',serif;font-size:32px;font-weight:400;color:var(--azul);opacity:.15;line-height:1;margin-bottom:.75rem">01</p>
+      <p style="font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--texto-ter);margin-bottom:.5rem">Formulário de perfil</p>
+      <p style="font-size:13px;line-height:1.75;color:var(--texto-sec)">Cada membro respondeu individualmente um formulário com perguntas de autoavaliação comportamental, disponibilidade, experiência prévia e histórico com o grupo. As respostas foram mantidas em sigilo — apenas os indicadores derivados foram compartilhados.</p>
+    </div>
+
+    <div style="background:var(--branco);padding:1.75rem">
+      <p style="font-family:'Playfair Display',serif;font-size:32px;font-weight:400;color:var(--azul);opacity:.15;line-height:1;margin-bottom:.75rem">02</p>
+      <p style="font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--texto-ter);margin-bottom:.5rem">Análise de aderência</p>
+      <p style="font-size:13px;line-height:1.75;color:var(--texto-sec)">As respostas foram processadas com uma metodologia de scoring que cruza perfil comportamental, disponibilidade real e preferências declaradas. Para cada membro foi gerado um percentual de aderência a cada uma das quatro ocupações.</p>
+    </div>
+
+    <div style="background:var(--branco);padding:1.75rem">
+      <p style="font-family:'Playfair Display',serif;font-size:32px;font-weight:400;color:var(--azul);opacity:.15;line-height:1;margin-bottom:.75rem">03</p>
+      <p style="font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--texto-ter);margin-bottom:.5rem">Apresentação dos perfis</p>
+      <p style="font-size:13px;line-height:1.75;color:var(--texto-sec)">Os perfis individuais foram apresentados ao grupo com os indicadores de aderência e características identificadas. Cada membro pôde visualizar sua sugestão de ocupação e o contexto que embasou a análise.</p>
+    </div>
+
+    <div style="background:var(--branco);padding:1.75rem">
+      <p style="font-family:'Playfair Display',serif;font-size:32px;font-weight:400;color:var(--azul);opacity:.15;line-height:1;margin-bottom:.75rem">04</p>
+      <p style="font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--texto-ter);margin-bottom:.5rem">Votação do grupo</p>
+      <p style="font-size:13px;line-height:1.75;color:var(--texto-sec)">Com os perfis em mãos, o grupo realizou uma votação simultânea — cada membro votou em um candidato por ocupação, sem poder votar em si mesmo. A decisão final foi do grupo, com a análise de aderência como referência, não como imposição.</p>
+    </div>
+
+  </div>
+
+  <!-- POLÍTICA INTERNA -->
+  <div style="border:1px solid var(--borda);border-radius:var(--radius);overflow:hidden">
+    <div style="background:var(--azul);padding:1.75rem">
+      <p style="font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.5rem">O melhor cenário</p>
+      <h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:400;color:white;line-height:1.3">Este grupo junto<br><em style="color:var(--dourado)">até o final do curso.</em></h3>
+    </div>
+    <div style="background:var(--branco);padding:1.75rem">
+
+      <div style="display:flex;gap:1.5rem;align-items:flex-start;padding:1rem 0;border-bottom:1px solid var(--borda)">
+        <span style="font-family:'Playfair Display',serif;font-size:20px;font-weight:400;color:var(--dourado);flex-shrink:0;width:28px">I</span>
+        <p style="font-size:13px;line-height:1.75;color:var(--texto-sec)"><strong style="color:var(--texto);font-weight:500">Confidencialidade das respostas.</strong> As respostas individuais do formulário são de conhecimento exclusivo do PO e do processo de análise. O grupo tem acesso apenas aos indicadores derivados de cada membro.</p>
+      </div>
+
+      <div style="display:flex;gap:1.5rem;align-items:flex-start;padding:1rem 0;border-bottom:1px solid var(--borda)">
+        <span style="font-family:'Playfair Display',serif;font-size:20px;font-weight:400;color:var(--dourado);flex-shrink:0;width:28px">II</span>
+        <p style="font-size:13px;line-height:1.75;color:var(--texto-sec)"><strong style="color:var(--texto);font-weight:500">Rotação semestral.</strong> Trabalhamos com o melhor cenário — oito semestres, oito membros, quatro ocupações. Nenhuma ocupação se repete por dois semestres seguidos, para que ao longo do curso cada um passe por todas as perspectivas do projeto.</p>
+      </div>
+
+      <div style="display:flex;gap:1.5rem;align-items:flex-start;padding:1rem 0;border-bottom:1px solid var(--borda)">
+        <span style="font-family:'Playfair Display',serif;font-size:20px;font-weight:400;color:var(--dourado);flex-shrink:0;width:28px">III</span>
+        <p style="font-size:13px;line-height:1.75;color:var(--texto-sec)"><strong style="color:var(--texto);font-weight:500">Exceções por consenso.</strong> Em casos extraordinários — saúde, disponibilidade ou contexto específico do semestre — a repetição de uma ocupação pode ser considerada, desde que haja concordância total do grupo.</p>
+      </div>
+
+      <div style="display:flex;gap:1.5rem;align-items:flex-start;padding:1rem 0">
+        <span style="font-family:'Playfair Display',serif;font-size:20px;font-weight:400;color:var(--dourado);flex-shrink:0;width:28px">IV</span>
+        <p style="font-size:13px;line-height:1.75;color:var(--texto-sec)"><strong style="color:var(--texto);font-weight:500">Definição estratégica, não hierárquica.</strong> As ocupações organizam a forma de contribuição de cada membro — não definem graus de importância. Todos são igualmente responsáveis pelo resultado final do projeto.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
 <section id="ocupacoes">
   <div class="section-header">
     <p class="section-eyebrow">As ocupações</p>
@@ -642,6 +737,11 @@
       <div class="role-num">01</div>
       <span class="role-tag" style="background:#E8F0FB;color:#003087;border:1px solid rgba(0,48,135,.15)">Product Owner</span>
       <h3 class="role-name">Gestor do projeto</h3>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:1rem;padding:8px 12px;background:var(--fundo);border-radius:var(--radius-sm)">
+        <div style="width:28px;height:28px;border-radius:50%;background:#E8F0FB;color:#003087;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;flex-shrink:0;border:1px solid rgba(0,48,135,.15)">AM</div>
+        <span style="font-size:12px;font-weight:500;color:var(--texto)">Augusto Mesquita</span>
+        <span style="font-size:10px;color:var(--texto-ter);font-style:italic;margin-left:auto">1º semestre</span>
+      </div>
       <p class="role-essence">"Organiza o que precisa ser feito, em que ordem e com qual padrão."</p>
       <p class="role-desc">O PO é o ponto de referência da operação do projeto — não do produto da empresa, mas da construção do trabalho em si. Traduz as expectativas do professor em entregas concretas, define prioridades quando há mais demanda do que tempo e garante que o grupo saiba o que está sendo feito e por quê.</p>
       <p class="block-label">Principais responsabilidades</p>
@@ -661,6 +761,11 @@
       <div class="role-num">02</div>
       <span class="role-tag" style="background:#e6f7f1;color:#0a5c3a;border:1px solid rgba(10,92,58,.15)">Scrum Master</span>
       <h3 class="role-name">Facilitador do processo</h3>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:1rem;padding:8px 12px;background:var(--fundo);border-radius:var(--radius-sm)">
+        <div style="width:28px;height:28px;border-radius:50%;background:#e6f7f1;color:#0a5c3a;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;flex-shrink:0;border:1px solid rgba(10,92,58,.15)">WR</div>
+        <span style="font-size:12px;font-weight:500;color:var(--texto)">Weberty Silva</span>
+        <span style="font-size:10px;color:var(--texto-ter);font-style:italic;margin-left:auto">1º semestre</span>
+      </div>
       <p class="role-essence">"Garante que o grupo se mova — sem travar."</p>
       <p class="role-desc">O Scrum Master cuida do ritmo e do fluxo do trabalho. Conduz as reuniões, acompanha os prazos de perto, identifica o que está travando o grupo e age para destravar. Não decide o conteúdo do projeto — facilita para que todos consigam trabalhar com mais clareza e menos atrito.</p>
       <p class="block-label">Principais responsabilidades</p>
@@ -680,6 +785,11 @@
       <div class="role-num">03</div>
       <span class="role-tag" style="background:#fff4e0;color:#7a4800;border:1px solid rgba(122,72,0,.15)">Líder</span>
       <h3 class="role-name">Porta-voz do grupo</h3>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:1rem;padding:8px 12px;background:var(--fundo);border-radius:var(--radius-sm)">
+        <div style="width:28px;height:28px;border-radius:50%;background:#fff4e0;color:#7a4800;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;flex-shrink:0;border:1px solid rgba(122,72,0,.15)">IS</div>
+        <span style="font-size:12px;font-weight:500;color:var(--texto)">Izabelle Oliveira</span>
+        <span style="font-size:10px;color:var(--texto-ter);font-style:italic;margin-left:auto">1º semestre</span>
+      </div>
       <p class="role-essence">"Representa o grupo e mantém o ambiente coeso."</p>
       <p class="role-desc">O Líder é a interface do grupo com o mundo externo — professor, apresentações, situações em que alguém precisa falar por todos. Internamente, cuida do clima e da motivação, percebendo quando o grupo precisa de atenção humana além da operacional.</p>
       <p class="block-label">Principais responsabilidades</p>
@@ -699,6 +809,11 @@
       <div class="role-num">04</div>
       <span class="role-tag" style="background:#fdeaea;color:#7a1a1a;border:1px solid rgba(122,26,26,.15)">Gestor de Conflitos</span>
       <h3 class="role-name">Mediador do grupo</h3>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:1rem;padding:8px 12px;background:var(--fundo);border-radius:var(--radius-sm)">
+        <div style="width:28px;height:28px;border-radius:50%;background:#fdeaea;color:#7a1a1a;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;flex-shrink:0;border:1px solid rgba(122,26,26,.15)">JP</div>
+        <span style="font-size:12px;font-weight:500;color:var(--texto)">João Souza</span>
+        <span style="font-size:10px;color:var(--texto-ter);font-style:italic;margin-left:auto">1º semestre</span>
+      </div>
       <p class="role-essence">"Transforma tensão em conversa, e conversa em acordo."</p>
       <p class="role-desc">O Gestor de Conflitos atua nos momentos em que surgem atritos — de ritmo, de opinião, de comprometimento. É quem nomeia o problema com cuidado, ouve todos os lados sem julgamento e conduz o grupo para um entendimento.</p>
       <p class="block-label">Principais responsabilidades</p>
@@ -715,509 +830,527 @@
     </div>
   </div>
 
-  <!-- VISION -->
-  <div class="vision-block">
-    <div class="vision-header">
-      <p class="eyebrow-white">Visão de longo prazo</p>
-      <h3>Trabalhamos com o melhor cenário:<br><em>este grupo junto até o final do curso.</em></h3>
+  <!-- DEV TEAM -->
+  <div style="background:var(--branco);border:1px solid var(--borda);border-radius:var(--radius);padding:2rem;margin-top:0">
+    <div class="role-num">05</div>
+    <span class="role-tag" style="background:#EAF3DE;color:#27500A;border:1px solid rgba(39,80,10,.15)">Dev Team</span>
+    <h3 class="role-name">Executores do projeto</h3>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1rem">
+      <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--fundo);border-radius:var(--radius-sm);flex:1;min-width:180px">
+        <div style="width:28px;height:28px;border-radius:50%;background:#FAECE7;color:#712B13;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;flex-shrink:0;border:1px solid rgba(113,43,19,.15)">CR</div>
+        <span style="font-size:12px;font-weight:500;color:var(--texto)">Caio Rodrigo</span>
+        <span style="font-size:10px;color:var(--texto-ter);font-style:italic;margin-left:auto">1º semestre</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--fundo);border-radius:var(--radius-sm);flex:1;min-width:180px">
+        <div style="width:28px;height:28px;border-radius:50%;background:#FAECE7;color:#712B13;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;flex-shrink:0;border:1px solid rgba(113,43,19,.15)">MP</div>
+        <span style="font-size:12px;font-weight:500;color:var(--texto)">Marcos Paulo</span>
+        <span style="font-size:10px;color:var(--texto-ter);font-style:italic;margin-left:auto">1º semestre</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--fundo);border-radius:var(--radius-sm);flex:1;min-width:180px">
+        <div style="width:28px;height:28px;border-radius:50%;background:#FAEEDA;color:#633806;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;flex-shrink:0;border:1px solid rgba(99,56,6,.15)">DV</div>
+        <span style="font-size:12px;font-weight:500;color:var(--texto)">Dayra Vitória</span>
+        <span style="font-size:10px;color:var(--texto-ter);font-style:italic;margin-left:auto">1º semestre</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--fundo);border-radius:var(--radius-sm);flex:1;min-width:180px">
+        <div style="width:28px;height:28px;border-radius:50%;background:#EAF3DE;color:#27500A;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;flex-shrink:0;border:1px solid rgba(39,80,10,.15)">AV</div>
+        <span style="font-size:12px;font-weight:500;color:var(--texto)">Ana Vitória</span>
+        <span style="font-size:10px;color:var(--texto-ter);font-style:italic;margin-left:auto">1º semestre</span>
+      </div>
     </div>
-    <div class="vision-body">
-      <div class="rule-row">
-        <span class="rule-num">I</span>
-        <p class="rule-text"><strong>Nenhuma ocupação se repete por dois semestres seguidos.</strong> O objetivo é que, ao longo do curso, cada um dos oito membros passe por cada uma das quatro ocupações — desenvolvendo competências diferentes a cada ciclo.</p>
-      </div>
-      <div class="rule-row">
-        <span class="rule-num">II</span>
-        <p class="rule-text"><strong>A rotação é parte da estratégia.</strong> Assumir uma ocupação diferente a cada semestre é uma oportunidade de crescimento deliberado — não uma obrigação burocrática. Com o tempo, o grupo inteiro terá vivenciado todos os ângulos do projeto.</p>
-      </div>
-      <div class="rule-row">
-        <span class="rule-num">III</span>
-        <p class="rule-text"><strong>Exceções existem, mas exigem consenso.</strong> Em casos extraordinários — de saúde, disponibilidade ou contexto específico do semestre — a repetição de uma ocupação pode ser considerada, desde que haja concordância total do grupo.</p>
-      </div>
+    <p class="role-essence">"Constroem o projeto — cada entrega passa pelas mãos do Dev Team."</p>
+    <p class="role-desc">O Dev Team é responsável pela execução das tarefas do projeto. Trabalham em colaboração com as ocupações de liderança, produzindo as análises, textos e materiais que compõem cada etapa. Sem o Dev Team, nenhum dos outros papéis tem o que gerenciar ou apresentar.</p>
+    <p class="block-label">Principais responsabilidades</p>
+    <ul class="resp-list">
+      <li><div class="resp-dot" style="background:#27500A"></div>Desenvolver as entregas de cada etapa conforme o backlog definido pelo PO</li>
+      <li><div class="resp-dot" style="background:#27500A"></div>Participar ativamente das reuniões e cerimônias conduzidas pelo Scrum Master</li>
+      <li><div class="resp-dot" style="background:#27500A"></div>Comunicar bloqueios e impedimentos com antecedência</li>
+      <li><div class="resp-dot" style="background:#27500A"></div>Contribuir com pesquisa, análise e redação dos documentos do projeto</li>
+    </ul>
+    <p class="block-label" style="margin-top:1rem">Características centrais</p>
+    <div class="traits">
+      <span class="trait">Comprometimento</span><span class="trait">Colaboração</span><span class="trait">Proatividade</span><span class="trait">Capacidade analítica</span><span class="trait">Comunicação</span>
     </div>
   </div>
+
 </section>
 
-<hr class="section-divider">
+</div><!-- fim tab-grupo -->
 
-<!-- PERFIS -->
-<section id="perfis">
-  <div class="section-header">
-    <p class="section-eyebrow">Perfis individuais</p>
-    <h2 class="section-title">Quem somos<br><em>e o que trazemos.</em></h2>
-    <p class="section-sub">Cada perfil foi elaborado a partir das respostas individuais ao formulário. As respostas originais são confidenciais — apenas os indicadores e características são exibidos.</p>
-  </div>
+<!-- ABA MEMBROS -->
+<div id="tab-membros" class="tab-page">
+  <div style="padding:80px 2rem;max-width:960px;margin:0 auto">
+    <div class="section-header">
+      <p class="section-eyebrow">Perfis individuais</p>
+      <h2 class="section-title">Quem somos<br><em>e o que trazemos.</em></h2>
+      <p class="section-sub">Cada perfil foi elaborado a partir das respostas individuais ao formulário. As respostas originais são confidenciais — apenas os indicadores e características são exibidos.</p>
+    </div>
 
-  <div class="profiles-grid">
+    <div class="profiles-grid">
 
-    <!-- Weberty -->
-    <div class="profile-card">
-      <div class="profile-header">
-        <div class="profile-avatar">WR</div>
-        <div>
-          <p class="profile-name">Weberty Roberto</p>
-          <span class="profile-badge" style="background:#E8F0FB;color:#003087;border:1px solid rgba(0,48,135,.15)">Sugestão: Gestor de Conflitos</span>
+      <!-- Weberty -->
+      <div class="profile-card">
+        <div class="profile-header">
+          <div class="profile-avatar" style="background:#EEEDFE;color:#3C3489;border-color:rgba(63,51,139,.2)">WR</div>
+          <div>
+            <p class="profile-name">Weberty Roberto</p>
+            <span class="profile-badge" style="background:#FAEEDA;color:#633806;border:1px solid rgba(99,56,6,.15)">Scrum Master</span>
+          </div>
         </div>
+        <hr class="profile-divider">
+        <div class="profile-grid">
+          <div>
+            <p class="prof-label">Disponibilidade</p>
+            <p class="prof-disp-num">4</p>
+            <p class="prof-disp-label">informado pelo membro</p>
+          </div>
+          <div>
+            <p class="prof-label">Aderência por papel</p>
+            <div class="bar-row"><span class="bar-label">Gestor Conflitos</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:#c0392b"></div></div><span class="bar-val">100%</span></div>
+            <div class="bar-row"><span class="bar-label">Líder</span><div class="bar-track"><div class="bar-fill" style="width:93%"></div></div><span class="bar-val">93%</span></div>
+            <div class="bar-row"><span class="bar-label">PO</span><div class="bar-track"><div class="bar-fill" style="width:90%"></div></div><span class="bar-val">90%</span></div>
+            <div class="bar-row"><span class="bar-label">Scrum Master</span><div class="bar-track"><div class="bar-fill" style="width:75%"></div></div><span class="bar-val">75%</span></div>
+          </div>
+          <div>
+            <p class="prof-label">Características</p>
+            <div class="prof-tags">
+              <span class="prof-tag">Alta empatia</span><span class="prof-tag">Escuta ativa</span><span class="prof-tag">Assertividade no escopo</span><span class="prof-tag">Visão sistêmica</span>
+            </div>
+          </div>
+        </div>
+        <div class="alert-box">Disponibilidade concentrada no período noturno.</div>
       </div>
-      <hr class="profile-divider">
-      <div class="profile-grid">
-        <div>
-          <p class="prof-label">Disponibilidade</p>
-          <p class="prof-disp-num">4</p>
-          <p class="prof-disp-label">informado pelo membro</p>
+
+      <!-- Caio -->
+      <div class="profile-card">
+        <div class="profile-header">
+          <div class="profile-avatar" style="background:#E1F5EE;color:#085041;border-color:rgba(8,80,65,.2)">CR</div>
+          <div>
+            <p class="profile-name">Caio Rodrigo</p>
+            <span class="profile-badge" style="background:#EAF3DE;color:#27500A;border:1px solid rgba(39,80,10,.15)">Dev Team</span>
+          </div>
         </div>
-        <div>
-          <p class="prof-label">Aderência por papel</p>
-          <div class="bar-row"><span class="bar-label">Gestor Conflitos</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:#c0392b"></div></div><span class="bar-val">100%</span></div>
-          <div class="bar-row"><span class="bar-label">Líder</span><div class="bar-track"><div class="bar-fill" style="width:93%"></div></div><span class="bar-val">93%</span></div>
-          <div class="bar-row"><span class="bar-label">PO</span><div class="bar-track"><div class="bar-fill" style="width:90%"></div></div><span class="bar-val">90%</span></div>
-          <div class="bar-row"><span class="bar-label">Scrum Master</span><div class="bar-track"><div class="bar-fill" style="width:75%"></div></div><span class="bar-val">75%</span></div>
+        <hr class="profile-divider">
+        <div class="profile-grid">
+          <div>
+            <p class="prof-label">Disponibilidade</p>
+            <p class="prof-disp-num">3</p>
+            <p class="prof-disp-label">informado pelo membro</p>
+          </div>
+          <div>
+            <p class="prof-label">Aderência por papel</p>
+            <div class="bar-row"><span class="bar-label">Gestor Conflitos</span><div class="bar-track"><div class="bar-fill" style="width:93%;background:#c0392b"></div></div><span class="bar-val">93%</span></div>
+            <div class="bar-row"><span class="bar-label">Líder</span><div class="bar-track"><div class="bar-fill" style="width:54%"></div></div><span class="bar-val">54%</span></div>
+            <div class="bar-row"><span class="bar-label">PO</span><div class="bar-track"><div class="bar-fill" style="width:36%"></div></div><span class="bar-val">36%</span></div>
+            <div class="bar-row"><span class="bar-label">Scrum Master</span><div class="bar-track"><div class="bar-fill" style="width:27%"></div></div><span class="bar-val">27%</span></div>
+          </div>
+          <div>
+            <p class="prof-label">Características</p>
+            <div class="prof-tags">
+              <span class="prof-tag">Boa escuta</span><span class="prof-tag">Perfil receptivo</span><span class="prof-tag">Em desenvolvimento</span>
+            </div>
+          </div>
         </div>
-        <div>
-          <p class="prof-label">Características</p>
-          <div class="prof-tags">
-            <span class="prof-tag">Alta empatia</span><span class="prof-tag">Escuta ativa</span><span class="prof-tag">Assertividade no escopo</span><span class="prof-tag">Visão sistêmica</span>
+        <div class="alert-box">Disponibilidade pode ser comprometida por questões de saúde ao longo do semestre.</div>
+      </div>
+
+      <!-- Marcos -->
+      <div class="profile-card">
+        <div class="profile-header">
+          <div class="profile-avatar" style="background:#FAECE7;color:#712B13;border-color:rgba(113,43,19,.2)">MP</div>
+          <div>
+            <p class="profile-name">Marcos Paulo</p>
+            <span class="profile-badge" style="background:#EAF3DE;color:#27500A;border:1px solid rgba(39,80,10,.15)">Dev Team</span>
+          </div>
+        </div>
+        <hr class="profile-divider">
+        <div class="profile-grid">
+          <div>
+            <p class="prof-label">Disponibilidade</p>
+            <p class="prof-disp-num">3</p>
+            <p class="prof-disp-label">informado pelo membro</p>
+          </div>
+          <div>
+            <p class="prof-label">Aderência por papel</p>
+            <div class="bar-row"><span class="bar-label">Scrum Master</span><div class="bar-track"><div class="bar-fill" style="width:77%"></div></div><span class="bar-val">77%</span></div>
+            <div class="bar-row"><span class="bar-label">PO</span><div class="bar-track"><div class="bar-fill" style="width:76%"></div></div><span class="bar-val">76%</span></div>
+            <div class="bar-row"><span class="bar-label">Gestor Conflitos</span><div class="bar-track"><div class="bar-fill" style="width:60%;background:#c0392b"></div></div><span class="bar-val">60%</span></div>
+            <div class="bar-row"><span class="bar-label">Líder</span><div class="bar-track"><div class="bar-fill" style="width:42%"></div></div><span class="bar-val">42%</span></div>
+          </div>
+          <div>
+            <p class="prof-label">Características</p>
+            <div class="prof-tags">
+              <span class="prof-tag">Iniciativa</span><span class="prof-tag">Perfil técnico</span><span class="prof-tag">Visão ampla</span>
+            </div>
+          </div>
+        </div>
+        <div class="alert-box">Disponibilidade pode ser reduzida em períodos de safra agrícola.</div>
+      </div>
+
+      <!-- Dayra -->
+      <div class="profile-card">
+        <div class="profile-header">
+          <div class="profile-avatar" style="background:#FAEEDA;color:#633806;border-color:rgba(99,56,6,.2)">DV</div>
+          <div>
+            <p class="profile-name">Dayra Vitória</p>
+            <span class="profile-badge" style="background:#EAF3DE;color:#27500A;border:1px solid rgba(39,80,10,.15)">Dev Team</span>
+          </div>
+        </div>
+        <hr class="profile-divider">
+        <div class="profile-grid">
+          <div>
+            <p class="prof-label">Disponibilidade</p>
+            <p class="prof-disp-num">4</p>
+            <p class="prof-disp-label">informado pelo membro</p>
+          </div>
+          <div>
+            <p class="prof-label">Aderência por papel</p>
+            <div class="bar-row"><span class="bar-label">Gestor Conflitos</span><div class="bar-track"><div class="bar-fill" style="width:94%;background:#c0392b"></div></div><span class="bar-val">94%</span></div>
+            <div class="bar-row"><span class="bar-label">Scrum Master</span><div class="bar-track"><div class="bar-fill" style="width:84%"></div></div><span class="bar-val">84%</span></div>
+            <div class="bar-row"><span class="bar-label">Líder</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">80%</span></div>
+            <div class="bar-row"><span class="bar-label">PO</span><div class="bar-track"><div class="bar-fill" style="width:74%"></div></div><span class="bar-val">74%</span></div>
+          </div>
+          <div>
+            <p class="prof-label">Características</p>
+            <div class="prof-tags">
+              <span class="prof-tag">Experiência em mediação</span><span class="prof-tag">Organização</span><span class="prof-tag">Alta escuta</span>
+            </div>
+          </div>
+        </div>
+        <div class="alert-box">Disponibilidade concentrada a partir das 20h nos dias úteis.</div>
+      </div>
+
+      <!-- Ana Vitória -->
+      <div class="profile-card">
+        <div class="profile-header">
+          <div class="profile-avatar" style="background:#EAF3DE;color:#27500A;border-color:rgba(39,80,10,.2)">AV</div>
+          <div>
+            <p class="profile-name">Ana Vitória</p>
+            <span class="profile-badge" style="background:#EAF3DE;color:#27500A;border:1px solid rgba(39,80,10,.15)">Dev Team</span>
+          </div>
+        </div>
+        <hr class="profile-divider">
+        <div class="profile-grid">
+          <div>
+            <p class="prof-label">Disponibilidade</p>
+            <p class="prof-disp-num">4</p>
+            <p class="prof-disp-label">informado pelo membro</p>
+          </div>
+          <div>
+            <p class="prof-label">Aderência por papel</p>
+            <div class="bar-row"><span class="bar-label">Gestor Conflitos</span><div class="bar-track"><div class="bar-fill" style="width:48%;background:#c0392b"></div></div><span class="bar-val">48%</span></div>
+            <div class="bar-row"><span class="bar-label">PO</span><div class="bar-track"><div class="bar-fill" style="width:43%"></div></div><span class="bar-val">43%</span></div>
+            <div class="bar-row"><span class="bar-label">Scrum Master</span><div class="bar-track"><div class="bar-fill" style="width:42%"></div></div><span class="bar-val">42%</span></div>
+            <div class="bar-row"><span class="bar-label">Líder</span><div class="bar-track"><div class="bar-fill" style="width:27%"></div></div><span class="bar-val">27%</span></div>
+          </div>
+          <div>
+            <p class="prof-label">Características</p>
+            <div class="prof-tags">
+              <span class="prof-tag">Alta organização</span><span class="prof-tag">Perfil administrativo</span><span class="prof-tag">Boa escuta</span>
+            </div>
           </div>
         </div>
       </div>
-      <div class="alert-box">Maior disponibilidade concentrada no período noturno — reuniões e entregas diurnas podem exigir alinhamento prévio.</div>
-    </div>
 
-    <!-- Caio -->
-    <div class="profile-card">
-      <div class="profile-header">
-        <div class="profile-avatar">CR</div>
-        <div>
-          <p class="profile-name">Caio Rodrigo</p>
-          <span class="profile-badge" style="background:#E8F0FB;color:#003087;border:1px solid rgba(0,48,135,.15)">Sugestão: Gestor de Conflitos</span>
-        </div>
-      </div>
-      <hr class="profile-divider">
-      <div class="profile-grid">
-        <div>
-          <p class="prof-label">Disponibilidade</p>
-          <p class="prof-disp-num">3</p>
-          <p class="prof-disp-label">informado pelo membro</p>
-        </div>
-        <div>
-          <p class="prof-label">Aderência por papel</p>
-          <div class="bar-row"><span class="bar-label">Gestor Conflitos</span><div class="bar-track"><div class="bar-fill" style="width:93%;background:#c0392b"></div></div><span class="bar-val">93%</span></div>
-          <div class="bar-row"><span class="bar-label">Líder</span><div class="bar-track"><div class="bar-fill" style="width:54%"></div></div><span class="bar-val">54%</span></div>
-          <div class="bar-row"><span class="bar-label">PO</span><div class="bar-track"><div class="bar-fill" style="width:36%"></div></div><span class="bar-val">36%</span></div>
-          <div class="bar-row"><span class="bar-label">Scrum Master</span><div class="bar-track"><div class="bar-fill" style="width:27%"></div></div><span class="bar-val">27%</span></div>
-        </div>
-        <div>
-          <p class="prof-label">Características</p>
-          <div class="prof-tags">
-            <span class="prof-tag">Boa escuta</span><span class="prof-tag">Perfil receptivo</span><span class="prof-tag">Em desenvolvimento</span><span class="prof-tag">Primeiros passos acadêmicos</span>
+      <!-- João Pedro -->
+      <div class="profile-card">
+        <div class="profile-header">
+          <div class="profile-avatar" style="background:#E6F1FB;color:#0C447C;border-color:rgba(12,68,124,.2)">JP</div>
+          <div>
+            <p class="profile-name">João Souza</p>
+            <span class="profile-badge" style="background:#FAEEDA;color:#633806;border:1px solid rgba(99,56,6,.15)">Gestor de Conflitos</span>
           </div>
         </div>
-      </div>
-      <div class="alert-box">Disponibilidade pode ser comprometida por questões de saúde ao longo do semestre.</div>
-    </div>
-
-    <!-- Marcos -->
-    <div class="profile-card">
-      <div class="profile-header">
-        <div class="profile-avatar">MP</div>
-        <div>
-          <p class="profile-name">Marcos Paulo</p>
-          <span class="profile-badge" style="background:#f5f5f5;color:#4a4a5a;border:1px solid #ddd">Sugestão: Membro executor</span>
-        </div>
-      </div>
-      <hr class="profile-divider">
-      <div class="profile-grid">
-        <div>
-          <p class="prof-label">Disponibilidade</p>
-          <p class="prof-disp-num">3</p>
-          <p class="prof-disp-label">informado pelo membro</p>
-        </div>
-        <div>
-          <p class="prof-label">Aderência por papel</p>
-          <div class="bar-row"><span class="bar-label">Scrum Master</span><div class="bar-track"><div class="bar-fill" style="width:77%"></div></div><span class="bar-val">77%</span></div>
-          <div class="bar-row"><span class="bar-label">PO</span><div class="bar-track"><div class="bar-fill" style="width:76%"></div></div><span class="bar-val">76%</span></div>
-          <div class="bar-row"><span class="bar-label">Gestor Conflitos</span><div class="bar-track"><div class="bar-fill" style="width:60%;background:#c0392b"></div></div><span class="bar-val">60%</span></div>
-          <div class="bar-row"><span class="bar-label">Líder</span><div class="bar-track"><div class="bar-fill" style="width:42%"></div></div><span class="bar-val">42%</span></div>
-        </div>
-        <div>
-          <p class="prof-label">Características</p>
-          <div class="prof-tags">
-            <span class="prof-tag">Iniciativa</span><span class="prof-tag">Perfil técnico</span><span class="prof-tag">Visão ampla</span><span class="prof-tag">Rotina de alta demanda</span>
+        <hr class="profile-divider">
+        <div class="profile-grid">
+          <div>
+            <p class="prof-label">Disponibilidade</p>
+            <p class="prof-disp-num">3</p>
+            <p class="prof-disp-label">informado pelo membro</p>
+          </div>
+          <div>
+            <p class="prof-label">Aderência por papel</p>
+            <div class="bar-row"><span class="bar-label">Gestor Conflitos</span><div class="bar-track"><div class="bar-fill" style="width:97%;background:#c0392b"></div></div><span class="bar-val">97%</span></div>
+            <div class="bar-row"><span class="bar-label">Líder</span><div class="bar-track"><div class="bar-fill" style="width:68%"></div></div><span class="bar-val">68%</span></div>
+            <div class="bar-row"><span class="bar-label">PO</span><div class="bar-track"><div class="bar-fill" style="width:58%"></div></div><span class="bar-val">58%</span></div>
+            <div class="bar-row"><span class="bar-label">Scrum Master</span><div class="bar-track"><div class="bar-fill" style="width:56%"></div></div><span class="bar-val">56%</span></div>
+          </div>
+          <div>
+            <p class="prof-label">Características</p>
+            <div class="prof-tags">
+              <span class="prof-tag">Mediação em grupo</span><span class="prof-tag">Alta escuta</span><span class="prof-tag">Orientação a pessoas</span>
+            </div>
           </div>
         </div>
+        <div class="alert-box">Disponibilidade limitada pela carga de trabalho e compromissos fixos durante a semana.</div>
       </div>
-      <div class="alert-box">Disponibilidade pode ser reduzida em períodos de safra agrícola.</div>
-    </div>
 
-    <!-- Dayra -->
-    <div class="profile-card">
-      <div class="profile-header">
-        <div class="profile-avatar">DV</div>
-        <div>
-          <p class="profile-name">Dayra Vitória</p>
-          <span class="profile-badge" style="background:#E8F0FB;color:#003087;border:1px solid rgba(0,48,135,.15)">Sugestão: Gestor de Conflitos</span>
-        </div>
-      </div>
-      <hr class="profile-divider">
-      <div class="profile-grid">
-        <div>
-          <p class="prof-label">Disponibilidade</p>
-          <p class="prof-disp-num">4</p>
-          <p class="prof-disp-label">informado pelo membro</p>
-        </div>
-        <div>
-          <p class="prof-label">Aderência por papel</p>
-          <div class="bar-row"><span class="bar-label">Gestor Conflitos</span><div class="bar-track"><div class="bar-fill" style="width:94%;background:#c0392b"></div></div><span class="bar-val">94%</span></div>
-          <div class="bar-row"><span class="bar-label">Scrum Master</span><div class="bar-track"><div class="bar-fill" style="width:84%"></div></div><span class="bar-val">84%</span></div>
-          <div class="bar-row"><span class="bar-label">Líder</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">80%</span></div>
-          <div class="bar-row"><span class="bar-label">PO</span><div class="bar-track"><div class="bar-fill" style="width:74%"></div></div><span class="bar-val">74%</span></div>
-        </div>
-        <div>
-          <p class="prof-label">Características</p>
-          <div class="prof-tags">
-            <span class="prof-tag">Experiência em mediação</span><span class="prof-tag">Organização</span><span class="prof-tag">Alta escuta</span><span class="prof-tag">Cobrança sem atrito</span>
+      <!-- Izabelle -->
+      <div class="profile-card">
+        <div class="profile-header">
+          <div class="profile-avatar" style="background:#FBEAF0;color:#72243E;border-color:rgba(114,36,62,.2)">IS</div>
+          <div>
+            <p class="profile-name">Izabelle Oliveira</p>
+            <span class="profile-badge" style="background:#fff4e0;color:#7a4800;border:1px solid rgba(122,72,0,.15)">Líder</span>
           </div>
         </div>
-      </div>
-      <div class="alert-box">Disponibilidade concentrada a partir das 20h nos dias úteis.</div>
-    </div>
-
-    <!-- Ana Vitória -->
-    <div class="profile-card">
-      <div class="profile-header">
-        <div class="profile-avatar">AV</div>
-        <div>
-          <p class="profile-name">Ana Vitória</p>
-          <span class="profile-badge" style="background:#f5f5f5;color:#4a4a5a;border:1px solid #ddd">Sugestão: Membro executor</span>
-        </div>
-      </div>
-      <hr class="profile-divider">
-      <div class="profile-grid">
-        <div>
-          <p class="prof-label">Disponibilidade</p>
-          <p class="prof-disp-num">4</p>
-          <p class="prof-disp-label">informado pelo membro</p>
-        </div>
-        <div>
-          <p class="prof-label">Aderência por papel</p>
-          <div class="bar-row"><span class="bar-label">Gestor Conflitos</span><div class="bar-track"><div class="bar-fill" style="width:48%;background:#c0392b"></div></div><span class="bar-val">48%</span></div>
-          <div class="bar-row"><span class="bar-label">PO</span><div class="bar-track"><div class="bar-fill" style="width:43%"></div></div><span class="bar-val">43%</span></div>
-          <div class="bar-row"><span class="bar-label">Scrum Master</span><div class="bar-track"><div class="bar-fill" style="width:42%"></div></div><span class="bar-val">42%</span></div>
-          <div class="bar-row"><span class="bar-label">Líder</span><div class="bar-track"><div class="bar-fill" style="width:27%"></div></div><span class="bar-val">27%</span></div>
-        </div>
-        <div>
-          <p class="prof-label">Características</p>
-          <div class="prof-tags">
-            <span class="prof-tag">Alta organização</span><span class="prof-tag">Perfil administrativo</span><span class="prof-tag">Boa escuta</span><span class="prof-tag">Preferência por execução</span>
+        <hr class="profile-divider">
+        <div class="profile-grid">
+          <div>
+            <p class="prof-label">Disponibilidade</p>
+            <p class="prof-disp-num">4</p>
+            <p class="prof-disp-label">informado pelo membro</p>
+          </div>
+          <div>
+            <p class="prof-label">Aderência por papel</p>
+            <div class="bar-row"><span class="bar-label">PO</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">100%</span></div>
+            <div class="bar-row"><span class="bar-label">Scrum Master</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">100%</span></div>
+            <div class="bar-row"><span class="bar-label">Líder</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">100%</span></div>
+            <div class="bar-row"><span class="bar-label">Gestor Conflitos</span><div class="bar-track"><div class="bar-fill" style="width:88%;background:#c0392b"></div></div><span class="bar-val">88%</span></div>
+          </div>
+          <div>
+            <p class="prof-label">Características</p>
+            <div class="prof-tags">
+              <span class="prof-tag">Liderança profissional</span><span class="prof-tag">Visão estratégica</span><span class="prof-tag">Alta assertividade</span>
+            </div>
           </div>
         </div>
+        <div class="alert-box">Dificuldade declarada com prazos muito curtos e com membros ausentes ou sem comunicação.</div>
       </div>
-      <div class="alert-box">Perfil mais alinhado à execução — baixa aderência a papéis de liderança, consistente com a própria autoavaliação.</div>
-    </div>
 
-    <!-- João Pedro -->
-    <div class="profile-card">
-      <div class="profile-header">
-        <div class="profile-avatar">JP</div>
-        <div>
-          <p class="profile-name">João Pedro</p>
-          <span class="profile-badge" style="background:#E8F0FB;color:#003087;border:1px solid rgba(0,48,135,.15)">Sugestão: Gestor de Conflitos</span>
-        </div>
-      </div>
-      <hr class="profile-divider">
-      <div class="profile-grid">
-        <div>
-          <p class="prof-label">Disponibilidade</p>
-          <p class="prof-disp-num">3</p>
-          <p class="prof-disp-label">informado pelo membro</p>
-        </div>
-        <div>
-          <p class="prof-label">Aderência por papel</p>
-          <div class="bar-row"><span class="bar-label">Gestor Conflitos</span><div class="bar-track"><div class="bar-fill" style="width:97%;background:#c0392b"></div></div><span class="bar-val">97%</span></div>
-          <div class="bar-row"><span class="bar-label">Líder</span><div class="bar-track"><div class="bar-fill" style="width:68%"></div></div><span class="bar-val">68%</span></div>
-          <div class="bar-row"><span class="bar-label">PO</span><div class="bar-track"><div class="bar-fill" style="width:58%"></div></div><span class="bar-val">58%</span></div>
-          <div class="bar-row"><span class="bar-label">Scrum Master</span><div class="bar-track"><div class="bar-fill" style="width:56%"></div></div><span class="bar-val">56%</span></div>
-        </div>
-        <div>
-          <p class="prof-label">Características</p>
-          <div class="prof-tags">
-            <span class="prof-tag">Mediação em grupo</span><span class="prof-tag">Alta escuta</span><span class="prof-tag">Assertividade respeitosa</span><span class="prof-tag">Orientação a pessoas</span>
+      <!-- Augusto -->
+      <div class="profile-card">
+        <div class="profile-header">
+          <div class="profile-avatar" style="background:#F1EFE8;color:#444441;border-color:rgba(68,68,65,.2)">AM</div>
+          <div>
+            <p class="profile-name">Augusto Mesquita</p>
+            <span class="profile-badge" style="background:#E8F0FB;color:#003087;border:1px solid rgba(0,48,135,.15)">Product Owner</span>
           </div>
         </div>
-      </div>
-      <div class="alert-box">Disponibilidade limitada pela carga de trabalho e compromissos fixos durante a semana.</div>
-    </div>
-
-    <!-- Izabelle -->
-    <div class="profile-card">
-      <div class="profile-header">
-        <div class="profile-avatar">IS</div>
-        <div>
-          <p class="profile-name">Izabelle Sara</p>
-          <span class="profile-badge" style="background:#E8F0FB;color:#003087;border:1px solid rgba(0,48,135,.15)">Sugestão: Líder</span>
-        </div>
-      </div>
-      <hr class="profile-divider">
-      <div class="profile-grid">
-        <div>
-          <p class="prof-label">Disponibilidade</p>
-          <p class="prof-disp-num">4</p>
-          <p class="prof-disp-label">informado pelo membro</p>
-        </div>
-        <div>
-          <p class="prof-label">Aderência por papel</p>
-          <div class="bar-row"><span class="bar-label">PO</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">100%</span></div>
-          <div class="bar-row"><span class="bar-label">Scrum Master</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">100%</span></div>
-          <div class="bar-row"><span class="bar-label">Líder</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">100%</span></div>
-          <div class="bar-row"><span class="bar-label">Gestor Conflitos</span><div class="bar-track"><div class="bar-fill" style="width:88%;background:#c0392b"></div></div><span class="bar-val">88%</span></div>
-        </div>
-        <div>
-          <p class="prof-label">Características</p>
-          <div class="prof-tags">
-            <span class="prof-tag">Liderança profissional</span><span class="prof-tag">Visão estratégica</span><span class="prof-tag">Alta assertividade</span><span class="prof-tag">Orientada a resultados</span>
+        <hr class="profile-divider">
+        <div class="profile-grid">
+          <div>
+            <p class="prof-label">Disponibilidade</p>
+            <p class="prof-disp-num">4</p>
+            <p class="prof-disp-label">informado pelo membro</p>
+          </div>
+          <div>
+            <p class="prof-label">Aderência por papel</p>
+            <div class="bar-row"><span class="bar-label">Scrum Master</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">100%</span></div>
+            <div class="bar-row"><span class="bar-label">Gestor Conflitos</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:#c0392b"></div></div><span class="bar-val">100%</span></div>
+            <div class="bar-row"><span class="bar-label">PO</span><div class="bar-track"><div class="bar-fill" style="width:98%"></div></div><span class="bar-val">98%</span></div>
+            <div class="bar-row"><span class="bar-label">Líder</span><div class="bar-track"><div class="bar-fill" style="width:96%"></div></div><span class="bar-val">96%</span></div>
+          </div>
+          <div>
+            <p class="prof-label">Características</p>
+            <div class="prof-tags">
+              <span class="prof-tag">Gestão de operações</span><span class="prof-tag">Análise de dados</span><span class="prof-tag">Visão estratégica</span>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="alert-box">Dificuldade declarada com prazos muito curtos e com membros ausentes ou sem comunicação.</div>
-    </div>
-
-    <!-- Augusto -->
-    <div class="profile-card">
-      <div class="profile-header">
-        <div class="profile-avatar">AM</div>
-        <div>
-          <p class="profile-name">Augusto Mesquita</p>
-          <span class="profile-badge" style="background:#E8F0FB;color:#003087;border:1px solid rgba(0,48,135,.15)">Sugestão: Product Owner</span>
-        </div>
-      </div>
-      <hr class="profile-divider">
-      <div class="profile-grid">
-        <div>
-          <p class="prof-label">Disponibilidade</p>
-          <p class="prof-disp-num">4</p>
-          <p class="prof-disp-label">informado pelo membro</p>
-        </div>
-        <div>
-          <p class="prof-label">Aderência por papel</p>
-          <div class="bar-row"><span class="bar-label">Scrum Master</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">100%</span></div>
-          <div class="bar-row"><span class="bar-label">Gestor Conflitos</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:#c0392b"></div></div><span class="bar-val">100%</span></div>
-          <div class="bar-row"><span class="bar-label">PO</span><div class="bar-track"><div class="bar-fill" style="width:98%"></div></div><span class="bar-val">98%</span></div>
-          <div class="bar-row"><span class="bar-label">Líder</span><div class="bar-track"><div class="bar-fill" style="width:96%"></div></div><span class="bar-val">96%</span></div>
-        </div>
-        <div>
-          <p class="prof-label">Características</p>
-          <div class="prof-tags">
-            <span class="prof-tag">Gestão de operações</span><span class="prof-tag">Análise de dados</span><span class="prof-tag">Visão estratégica</span><span class="prof-tag">Referência natural</span>
-          </div>
-        </div>
-      </div>
-      <div class="alert-box">Prefere direcionar sua energia para o papel de PO — escolha consciente sobre onde quer contribuir neste semestre.</div>
-    </div>
-
-  </div>
-</section>
-
-<hr class="section-divider">
-
-<!-- VOTAÇÃO -->
-<section id="votacao">
-  <div class="section-header">
-    <p class="section-eyebrow">Votação</p>
-    <h2 class="section-title">A decisão<br><em>é do grupo.</em></h2>
-    <p class="section-sub">Cada membro vota em um candidato por ocupação. Os resultados aparecem em tempo real. Você não pode votar em si mesmo.</p>
-  </div>
-
-  <div class="voting-wrap">
-    <div class="voting-header">
-      <h2>Painel de votação</h2>
-      <p>Identifique-se, vote em um candidato por ocupação e acompanhe o resultado ao vivo.</p>
-    </div>
-    <div class="voting-body">
-
-      <!-- IDENTIFY -->
-      <div class="vstep active" id="vstep-id">
-        <p class="v-label">Selecione seu nome</p>
-        <div id="v-name-list"></div>
-        <div class="btn-row">
-          <button class="btn btn-primary btn-full" onclick="vConfirm()">Continuar →</button>
-        </div>
-      </div>
-
-      <!-- VOTE -->
-      <div class="vstep" id="vstep-vote">
-        <p style="font-size:13px;color:var(--texto-sec);margin-bottom:1.25rem">Votando como <strong id="v-voter-label"></strong> — vote em um candidato por ocupação.</p>
-        <div id="v-panels"></div>
-        <div class="btn-row">
-          <button class="btn btn-outline" onclick="vShow('vstep-id')">← Voltar</button>
-          <button class="btn btn-gold" style="flex:1" onclick="vSubmit()">Registrar meu voto ↗</button>
-        </div>
-      </div>
-
-      <!-- RESULTS -->
-      <div class="vstep" id="vstep-results">
-        <p class="v-label" id="v-count-label"></p>
-        <div id="v-results"></div>
-        <div class="btn-row">
-          <button class="btn btn-outline" onclick="vShow('vstep-id')">Voltar ao início</button>
-          <button class="btn btn-primary" onclick="vLoadResults()">Atualizar ↺</button>
-        </div>
+        <div class="alert-box">Prefere direcionar sua energia para o papel de PO — escolha consciente sobre onde quer contribuir neste semestre.</div>
       </div>
 
     </div>
   </div>
-</section>
+</div><!-- fim tab-membros -->
 
-<footer>
-  <p>Grupo de Administração · PUC Minas<br>
-  <em>A definição dessas ocupações é uma escolha estratégica. Não é hierarquia — é organização.</em></p>
-</footer>
+<!-- ABA PRÓXIMA ETAPA -->
+<div id="tab-etapa" class="tab-page">
+  <div style="padding:80px 2rem;max-width:960px;margin:0 auto">
+    <div class="section-header">
+      <p class="section-eyebrow">Próximos passos</p>
+      <h2 class="section-title">Etapa 2<br><em>Espaço Têxtil.</em></h2>
+    </div>
+
+    <!-- OBSERVAÇÃO TERMO -->
+    <div style="background:var(--azul-claro);border-left:3px solid var(--azul);border-radius:var(--radius-sm);padding:1rem 1.25rem;margin-bottom:2rem;display:flex;gap:12px;align-items:flex-start">
+      <span style="font-size:15px;flex-shrink:0;margin-top:1px">ℹ</span>
+      <div>
+        <p style="font-size:13px;font-weight:500;color:var(--azul);margin-bottom:3px">Termo de confidencialidade</p>
+        <p style="font-size:12px;color:var(--texto-sec);line-height:1.6">O termo de confidencialidade com o Espaço Têxtil é individual. Caso ainda não tenha assinado, providencie antes do Passo 2 — a entrevista com o empreendedor só deve ser agendada após assinatura e validação pela professora.</p>
+      </div>
+    </div>
+
+    <!-- PASSO 1 -->
+    <div style="background:var(--branco);border:1px solid var(--borda);border-radius:var(--radius);overflow:hidden;margin-bottom:16px">
+      <div style="background:var(--azul);padding:1.25rem 1.75rem;display:flex;align-items:center;gap:14px">
+        <div style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.15);color:white;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;flex-shrink:0">1</div>
+        <div>
+          <p style="font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:2px">Passo 1</p>
+          <p style="font-size:17px;font-weight:500;color:white">Pesquisa prévia sobre o negócio</p>
+        </div>
+      </div>
+      <div style="padding:1.5rem 1.75rem">
+        <p style="font-size:13px;font-style:italic;color:var(--texto-sec);line-height:1.75;margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:1px solid var(--borda)">Ao final deste passo, o grupo deve ter uma visão externa e independente do Espaço Têxtil — o que qualquer pessoa conseguiria descobrir sobre a empresa sem ter acesso interno. Esse material será a base de comparação com as informações da entrevista.</p>
+
+        <div style="display:flex;flex-direction:column;gap:12px">
+
+          <div style="background:var(--fundo);border-radius:var(--radius-sm);padding:1rem 1.25rem">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+              <span style="font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:20px;background:var(--azul-claro);color:var(--azul)">1.1</span>
+              <p style="font-size:13px;font-weight:500;color:var(--texto)">Redes sociais — Instagram e Facebook</p>
+            </div>
+            <p style="font-size:12px;color:var(--texto-sec);line-height:1.7">Avaliar o tipo de relacionamento que a empresa constrói com seu público: frequência de postagens, originalidade do conteúdo, engajamento proporcional à audiência, resposta a comentários e o que os clientes revelam nas avaliações.</p>
+          </div>
+
+          <div style="background:var(--fundo);border-radius:var(--radius-sm);padding:1rem 1.25rem">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+              <span style="font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:20px;background:var(--azul-claro);color:var(--azul)">1.2</span>
+              <p style="font-size:13px;font-weight:500;color:var(--texto)">Google + Google Maps</p>
+            </div>
+            <p style="font-size:12px;color:var(--texto-sec);line-height:1.7">Verificar posicionamento nos resultados de busca, completude do perfil no Google Meu Negócio, nota e avaliações dos clientes, resposta a críticas e mapeamento de concorrentes na mesma região.</p>
+          </div>
+
+          <div style="background:var(--fundo);border-radius:var(--radius-sm);padding:1rem 1.25rem">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+              <span style="font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:20px;background:var(--azul-claro);color:var(--azul)">1.3</span>
+              <p style="font-size:13px;font-weight:500;color:var(--texto)">Site oficial da empresa</p>
+            </div>
+            <p style="font-size:12px;color:var(--texto-sec);line-height:1.7">Analisar profissionalismo, navegação, descrição de produtos e serviços, presença de seção institucional, formas de contato, frequência de atualização e coerência da linguagem com o público-alvo.</p>
+          </div>
+
+          <div style="background:var(--fundo);border-radius:var(--radius-sm);padding:1rem 1.25rem">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+              <span style="font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:20px;background:var(--azul-claro);color:var(--azul)">1.4</span>
+              <p style="font-size:13px;font-weight:500;color:var(--texto)">LinkedIn e outras plataformas</p>
+            </div>
+            <p style="font-size:12px;color:var(--texto-sec);line-height:1.7">Levantar presença corporativa em plataformas profissionais, porte real da operação via número de funcionários vinculados, produção de conteúdo próprio e comparação com concorrentes do segmento têxtil na região.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- PASSO 2 -->
+    <div style="background:var(--branco);border:1px solid var(--borda);border-radius:var(--radius);overflow:hidden;margin-bottom:16px">
+      <div style="background:#1a4f7a;padding:1.25rem 1.75rem;display:flex;align-items:center;gap:14px">
+        <div style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.15);color:white;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;flex-shrink:0">2</div>
+        <div>
+          <p style="font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:2px">Passo 2</p>
+          <p style="font-size:17px;font-weight:500;color:white">Entrevista com o empreendedor</p>
+        </div>
+        <span style="margin-left:auto;font-size:11px;padding:3px 10px;border-radius:40px;background:rgba(242,183,5,.2);color:var(--dourado);font-weight:500">Após assinatura do termo</span>
+      </div>
+      <div style="padding:1.5rem 1.75rem">
+        <p style="font-size:13px;font-style:italic;color:var(--texto-sec);line-height:1.75;margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:1px solid var(--borda)">Este passo acessa o que não está disponível publicamente: a visão do empreendedor sobre o próprio negócio. A entrevista não é um questionário burocrático — é uma escuta ativa capaz de captar o que o empreendedor enfatiza, hesita ou revela sem perceber.</p>
+
+        <div style="display:flex;flex-direction:column;gap:12px">
+
+          <div style="background:var(--fundo);border-radius:var(--radius-sm);padding:1rem 1.25rem">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+              <span style="font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:20px;background:#e6f7f1;color:#0a5c3a">2.1</span>
+              <p style="font-size:13px;font-weight:500;color:var(--texto)">Planejamento da entrevista</p>
+            </div>
+            <p style="font-size:12px;color:var(--texto-sec);line-height:1.7">Definir objetivo central, quem será entrevistado, formato (presencial, videochamada ou formulário), data, local e o condutor — considerando que um membro herdeiro da empresa pode facilitar ou inibir certas respostas.</p>
+          </div>
+
+          <div style="background:var(--fundo);border-radius:var(--radius-sm);padding:1rem 1.25rem">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+              <span style="font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:20px;background:#e6f7f1;color:#0a5c3a">2.2</span>
+              <p style="font-size:13px;font-weight:500;color:var(--texto)">Roteiro de entrevista</p>
+            </div>
+            <p style="font-size:12px;color:var(--texto-sec);line-height:1.7">Elaborar roteiro com perguntas adaptadas ao contexto têxtil — incluindo cadeia de fornecimento, sazonalidade, processo produtivo e tendências do setor. Enviar ao professor-tutor para validação antes de usar.</p>
+          </div>
+
+          <div style="background:var(--fundo);border-radius:var(--radius-sm);padding:1rem 1.25rem">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+              <span style="font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:20px;background:#e6f7f1;color:#0a5c3a">2.3</span>
+              <p style="font-size:13px;font-weight:500;color:var(--texto)">Realização da entrevista</p>
+            </div>
+            <p style="font-size:12px;color:var(--texto-sec);line-height:1.7">Conduzir equilibrando estrutura e fluidez. Atenção ao conteúdo das respostas, ao contexto emocional do empreendedor e às lacunas — o que não foi respondido ou foi respondido de forma vaga revela tanto quanto o que foi dito.</p>
+          </div>
+
+          <div style="background:var(--fundo);border-radius:var(--radius-sm);padding:1rem 1.25rem">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+              <span style="font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:20px;background:#e6f7f1;color:#0a5c3a">2.4</span>
+              <p style="font-size:13px;font-weight:500;color:var(--texto)">Transcrição e registro dos resultados</p>
+            </div>
+            <p style="font-size:12px;color:var(--texto-sec);line-height:1.7">Registrar o que o empreendedor disse na forma mais próxima possível das suas palavras — reinterpretar nesta etapa contamina os dados. Preservar trechos de fala direta relevantes entre aspas e incluir seção de impressões gerais do grupo.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- PASSO 3 -->
+    <div style="background:var(--branco);border:1px solid var(--borda);border-radius:var(--radius);overflow:hidden;margin-bottom:40px">
+      <div style="background:#0d3d6b;padding:1.25rem 1.75rem;display:flex;align-items:center;gap:14px">
+        <div style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.15);color:white;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;flex-shrink:0">3</div>
+        <div>
+          <p style="font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:2px">Passo 3</p>
+          <p style="font-size:17px;font-weight:500;color:white">Sistematização das informações</p>
+        </div>
+        <span style="margin-left:auto;font-size:11px;padding:3px 10px;border-radius:40px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.6);font-weight:500">Após a entrevista</span>
+      </div>
+      <div style="padding:1.5rem 1.75rem">
+        <p style="font-size:13px;font-style:italic;color:var(--texto-sec);line-height:1.75;margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:1px solid var(--borda)">Este passo transforma dados brutos em conhecimento estruturado. Não se trata de copiar informações coletadas — trata-se de interpretá-las, cruzá-las e organizá-las em um texto que apresente o Espaço Têxtil como um objeto de análise.</p>
+
+        <div style="display:flex;flex-direction:column;gap:12px">
+
+          <div style="background:var(--fundo);border-radius:var(--radius-sm);padding:1rem 1.25rem">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+              <span style="font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:20px;background:#FAEEDA;color:#633806">3.1</span>
+              <p style="font-size:13px;font-weight:500;color:var(--texto)">Análise comparativa: pesquisa prévia × entrevista</p>
+            </div>
+            <p style="font-size:12px;color:var(--texto-sec);line-height:1.7">Cruzar ativamente três tipos de achados: convergências (imagem pública coincide com o relato), divergências (diferença entre o que a empresa projeta e o que o empreendedor descreve) e informações exclusivas da entrevista — geralmente as mais estratégicas.</p>
+          </div>
+
+          <div style="background:var(--fundo);border-radius:var(--radius-sm);padding:1rem 1.25rem">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+              <span style="font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:20px;background:#FAEEDA;color:#633806">3.2</span>
+              <p style="font-size:13px;font-weight:500;color:var(--texto)">Texto descritivo do negócio</p>
+            </div>
+            <p style="font-size:12px;color:var(--texto-sec);line-height:1.7">Texto em prosa, sem bullet points, cobrindo: segmento e porte, histórico, missão/visão/valores, proposta de valor, perfil do público-alvo, localização e justificativa de existência da empresa. A faculdade exige formato descritivo — nenhuma seção pode ser substituída por listas.</p>
+          </div>
+
+          <div style="background:var(--fundo);border-radius:var(--radius-sm);padding:1rem 1.25rem">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+              <span style="font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:20px;background:#FAEEDA;color:#633806">3.3</span>
+              <p style="font-size:13px;font-weight:500;color:var(--texto)">Ferramentas tecnológicas</p>
+            </div>
+            <p style="font-size:12px;color:var(--texto-sec);line-height:1.7">Descrever cada ferramenta identificada (sistemas de gestão, comunicação com clientes, maquinário digital, plataformas de venda) — o que é, para que serve e como a empresa usa na prática — e indicar qual é mais crítica para a operação.</p>
+          </div>
+
+          <div style="background:var(--fundo);border-radius:var(--radius-sm);padding:1rem 1.25rem">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+              <span style="font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:20px;background:#FAEEDA;color:#633806">3.4</span>
+              <p style="font-size:13px;font-weight:500;color:var(--texto)">Revisão final e adequação ao template</p>
+            </div>
+            <p style="font-size:12px;color:var(--texto-sec);line-height:1.7">Verificar se o documento conta uma história coerente sobre o negócio, corrigir inconsistências e lacunas entre seções, formatar no template da faculdade e obter aprovação do PO antes da submissão.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- PRAZO AO FINAL -->
+    <div style="background:var(--azul);border-radius:var(--radius);padding:1.75rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:40px">
+      <div>
+        <p style="font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:6px">Prazo da Etapa 2</p>
+        <p style="font-family:'Playfair Display',serif;font-size:28px;font-weight:400;color:white;line-height:1">06 de abril de 2026</p>
+      </div>
+      <div style="text-align:right">
+        <p style="font-size:11px;color:rgba(255,255,255,.5);margin-bottom:8px">Entregas obrigatórias</p>
+        <p style="font-size:13px;color:white;margin-bottom:4px">Termo de confidencialidade</p>
+        <p style="font-size:13px;color:white">Pesquisa sobre o cliente</p>
+      </div>
+    </div>
+
+  </div>
+</div><!-- fim tab-etapa -->
+
+
+
+
 
 <script>
-const MEMBERS = [
-  {name:'Weberty Roberto',  initials:'WR'},
-  {name:'Caio Rodrigo',     initials:'CR'},
-  {name:'Marcos Paulo',     initials:'MP'},
-  {name:'Dayra Vitória',    initials:'DV'},
-  {name:'Ana Vitória',      initials:'AV'},
-  {name:'João Pedro',       initials:'JP'},
-  {name:'Izabelle Sara',    initials:'IS'},
-  {name:'Augusto Mesquita', initials:'AM'},
-];
-
-const ROLES = [
-  {key:'PO',  label:'Product Owner',        color:'#003087', bg:'#E8F0FB', bar:'#003087'},
-  {key:'SM',  label:'Scrum Master',         color:'#0a5c3a', bg:'#e6f7f1', bar:'#0a5c3a'},
-  {key:'LID', label:'Líder',                color:'#7a4800', bg:'#fff4e0', bar:'#F2B705'},
-  {key:'GC',  label:'Gestor de Conflitos',  color:'#7a1a1a', bg:'#fdeaea', bar:'#c0392b'},
-];
-
-const STORAGE_KEY = 'votes_grupo_adm_puc_v1';
-let vVoter = null;
-let vMyVotes = {};
-
-async function vLoadVotes() {
-  try {
-    const r = await window.storage.get(STORAGE_KEY, true);
-    return r ? JSON.parse(r.value) : {};
-  } catch(e) { return {}; }
+function switchTab(tab) {
+  document.querySelectorAll('.tab-page').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  document.getElementById('tab-' + tab).scrollTop = 0;
+  event.target.classList.add('active');
 }
-
-async function vSaveVotes(votes) {
-  await window.storage.set(STORAGE_KEY, JSON.stringify(votes), true);
-}
-
-function vShow(id) {
-  document.querySelectorAll('.vstep').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  if (id === 'vstep-id') vRenderNames();
-  if (id === 'vstep-results') vLoadResults();
-}
-
-async function vRenderNames() {
-  const votes = await vLoadVotes();
-  document.getElementById('v-name-list').innerHTML = MEMBERS.map(m => {
-    const voted = votes[m.name] !== undefined;
-    const sel = vVoter === m.name;
-    return `<div class="v-row${voted?' disabled':''}${sel?' selected':''}" onclick="vSelectVoter('${m.name}')">
-      <div class="v-avatar">${m.initials}</div>
-      <span style="font-size:13px;font-weight:500;flex:1;color:var(--texto)">${m.name}</span>
-      ${voted ? `<span style="font-size:11px;font-style:italic;color:var(--texto-ter)">já votou</span>` : ''}
-      <div class="v-radio${sel?' checked':''}">
-        ${sel ? '<div class="v-radio-dot"></div>' : ''}
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function vSelectVoter(name) {
-  vVoter = name;
-  vRenderNames();
-}
-
-async function vConfirm() {
-  if (!vVoter) { alert('Selecione seu nome para continuar.'); return; }
-  const votes = await vLoadVotes();
-  if (votes[vVoter]) { alert('Você já registrou seu voto nesta sessão.'); return; }
-  document.getElementById('v-voter-label').textContent = vVoter;
-  vMyVotes = {};
-  vRenderPanels();
-  vShow('vstep-vote');
-}
-
-function vRenderPanels() {
-  document.getElementById('v-panels').innerHTML = ROLES.map(role => `
-    <div class="v-role-card">
-      <span class="v-role-badge" style="background:${role.bg};color:${role.color};border:1px solid ${role.color}22">${role.label}</span>
-      ${MEMBERS.map(m => {
-        const isSelf = m.name === vVoter;
-        const sel = vMyVotes[role.key] === m.name;
-        return `<div class="v-row${sel?' selected':''}${isSelf?' disabled':''}" onclick="vSelect('${role.key}','${m.name}')">
-          <div class="v-avatar">${m.initials}</div>
-          <span style="font-size:13px;font-weight:500;flex:1;color:var(--texto)">${m.name}${isSelf?' <em style="font-size:11px;color:var(--texto-ter)">(você)</em>':''}</span>
-          <div class="v-radio${sel?' checked':''}">
-            ${sel ? '<div class="v-radio-dot"></div>' : ''}
-          </div>
-        </div>`;
-      }).join('')}
-    </div>`).join('');
-}
-
-function vSelect(key, name) {
-  vMyVotes[key] = name;
-  vRenderPanels();
-}
-
-async function vSubmit() {
-  const missing = ROLES.filter(r => !vMyVotes[r.key]);
-  if (missing.length) {
-    alert(`Vote em todos os papéis antes de confirmar.\nFaltam: ${missing.map(r => r.label).join(', ')}`);
-    return;
-  }
-  const votes = await vLoadVotes();
-  votes[vVoter] = vMyVotes;
-  await vSaveVotes(votes);
-  vShow('vstep-results');
-}
-
-async function vLoadResults() {
-  const votes = await vLoadVotes();
-  const count = Object.keys(votes).length;
-  document.getElementById('v-count-label').textContent = `${count} de ${MEMBERS.length} membros votaram`;
-
-  document.getElementById('v-results').innerHTML = ROLES.map(role => {
-    const tally = {};
-    MEMBERS.forEach(m => { tally[m.name] = []; });
-    Object.entries(votes).forEach(([voter, v]) => {
-      if (v[role.key]) tally[v[role.key]].push(voter);
-    });
-    const sorted = Object.entries(tally).sort((a, b) => b[1].length - a[1].length);
-    const max = sorted[0][1].length;
-
-    return `<div style="margin-bottom:1.25rem">
-      <span class="v-role-badge" style="background:${role.bg};color:${role.color};border:1px solid ${role.color}22;display:inline-block;margin-bottom:10px">${role.label}</span>
-      ${sorted.map(([name, voters]) => {
-        const m = MEMBERS.find(x => x.name === name);
-        const pct = count > 0 ? Math.round((voters.length / count) * 100) : 0;
-        const winner = voters.length > 0 && voters.length === max;
-        return `<div style="margin-bottom:8px">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-            <div class="v-avatar" style="width:26px;height:26px;font-size:10px">${m.initials}</div>
-            <span style="font-size:13px;font-weight:${winner?'500':'400'};color:var(--texto);flex:1">${name}</span>
-            <span style="font-size:12px;color:var(--texto-ter)">${voters.length}v</span>
-            ${winner && voters.length > 0 ? `<span class="v-winner">mais votado</span>` : ''}
-          </div>
-          <div class="bar-track" style="margin-left:34px">
-            <div class="bar-fill" style="width:${pct}%;background:${role.bar}"></div>
-          </div>
-          ${voters.length > 0 ? `<div style="margin-left:34px;margin-top:4px">${voters.map(v => `<span class="v-chip">${v}</span>`).join('')}</div>` : ''}
-        </div>`;
-      }).join('')}
-      <hr style="border:none;border-top:1px solid var(--borda);margin-top:8px">
-    </div>`;
-  }).join('');
-}
-
-vRenderNames();
 </script>
 </body>
 </html>
